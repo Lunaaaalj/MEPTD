@@ -1,0 +1,65 @@
+Identifier: MEX-INEGI-ESD3.03-MOLEC-2024
+
+Title: Módulo sobre Lectura (MOLEC) 2024, Datos correspondientes al mes de febrero
+
+Description: El Módulo sobre Lectura, como módulo de la Encuesta Nacional sobre Confianza del Consumidor (ENCO), tiene la misma población objeto de estudio: personas de 18 y más años de edad que residen permanentemente en las viviendas particulares ubicadas en el territorio nacional en la fecha del levantamiento. Asimismo, dado que el objetivo de MOLEC es conocer la lectura de determinados materiales de la población de 18 y más años de edad, es indispensable que la persona que proporcione los datos del módulo sepa leer. 
+
+Objetivo general
+
+El Módulo sobre Lectura comienza a levantar información en 2015. Este proyecto tiene el objetivo de generar información estadística sobre el comportamiento lector de la población residente habitual en México de 18 y más años de edad, con la finalidad de proporcionar datos útiles para conocer las características de la citada población y proporcionar elementos para el fomento de la lectura.
+
+Objetivos específicos
+
+- Conocer las características principales de la lectura de libros, revistas, periódicos, historietas y páginas de Internet, foros o blogs.
+- Identificar particularidades de la lectura tales como: preferencia de soporte (impreso o digital), motivo principal por el cual se lee, modo de adquisición de los materiales, tipo de material y lugar de preferencia para realizarla.
+- Conocer generalidades de la lectura en México, tales como: duración de la sesión, velocidad de la lectura y comprensión de la misma manera autopercibida.
+- Conocer si la población realiza alguna otra actividad mientras lee y si realiza una mayor búsqueda de información derivado de la lectura que realiza.
+- Identificar las condiciones favorables para estimular la práctica de la lectura.
+
+MOLEC se apoya en el documento Metodología Común para Explorar y Medir el Comportamiento Lector del Centro Regional para el Fomento del Libro en América Latina y el Caribe (CERLALC), el cual es un organismo intergubernamental, bajo los auspicios de la Organización de las Naciones Unidas para la Educación, la Ciencia y la Cultura (UNESCO); toda vez que ésta proporciona una base sobre el estudio de la lectura en la población de países iberoamericanos. Esta metodología proporciona los conceptos que se apartan de la concepción de la lectura únicamente referida a libros, lo que excluye otros materiales y prácticas lectoras. En cambio, propone una visión global del tema y obtiene información sobre la lectura de distintos materiales y soportes de lectura.
+
+MOLEC hace uso de estas recomendaciones, adaptando sus conceptos y metodología a las características muestrales y conceptuales requeridas para la aplicación como módulo.
+
+De la población de 18 y más años de edad que sabe leer y escribir, se requiere conocer si se consideran o no personas que acostumbren a leer. Esta apreciación (medición subjetiva) se ve influida por diversos factores (1), por lo que se consideró conveniente presentar esta variable de forma independientemente a la condición de lectura (medición objetiva) de materiales seleccionados como libros, revistas, periódicos, historietas, páginas de Internet, foros o blogs (2). Esto permite conocer si existe alguna correlación entre ambas variables.
+
+El documento Metodología Común para Explorar y Medir el Comportamiento Lector, al reconocer la lectura y la cultura de la palabra escrita como un fenómeno complejo, propone abandonar los estándares basados únicamente en la lectura de libros y expone una serie de indicadores y conceptos a partir de una medición del comportamiento lector en diferentes soportes de lectura, tales como libros, revistas, periódicos e historietas. Incluye también publicaciones digitales, toda vez que considera el soporte digital e impreso y la lectura mediante páginas de Internet, así como diversos aspectos sobre las prácticas y usos de la lectura en la población, lo que permite tener una caracterización más amplia e incluyente de los medios, usos sociales y prácticas asociadas a la lectura.
+
+Conceptos básicos en materia de lectura
+
+Comportamiento lector. Expresión social de la forma en que una persona representa y práctica la lectura en el contexto de la cultura escrita que lo acoge (3). 
+
+Lector. Todo sujeto que declare leer cualquier tipo de material escrito, no restringido a la lectura de libros, con el objeto de no dejar fuera a la población que lee sobre otros soportes de escritura (4). 
+
+MOLEC considera como lector a toda persona que declare leer cualquiera de los materiales de lectura seleccionados para este estudio.
+
+Fuente: Módulo sobre Lectura 2015. Diseño Conceptual. Instituto Nacional de Estadística y Geografía. INEGI https://www.inegi.org.mx/app/biblioteca/ficha.html?upc=702825072544
+
+1 C2 Cultura y Ciudadanía AC. Hábitos de lectura en el DF.
+2 CERLALC. Metodología común para explorar y medir el comportamiento lector.
+3 CERLALC. Metodología común para explorar y medir el comportamiento lector.
+4 Ibíd.
+
+NOTA:
+El 11 de julio de 2024, se reemplazó el archivo de Conjunto de datos de 2024, debido a la actualización de los campos de los nmónicos: p8_2, p14_2, p20_2, p23_2, L_Format, R_Format y P_Format. Dichos ajustes están registrados en el archivo de la Bitácora de cambios.
+
+Modified: 2024-07-11
+
+Publisher: Instituto Nacional de Estadística y Geografía, INEGI
+
+Mbox: atencion.usuarios@inegi.org.mx
+
+License: https://www.inegi.org.mx/inegi/terminos.html
+
+DataDictionary: https://www.inegi.org.mx/rnm/index.php/catalog/970/data-dictionary
+
+Keyword: "biblioteca", "cultura", "enciclopedia", "encuesta", "hogar", "internet", "lectura", "librería", "libro", "periódico", "población", "prensa", "publicación"
+
+ContactPoint: Mtro. J. Armando Aguiar Rodríguez, 800 111 4634
+
+Temporal: 2024-02-01-2024-02-19
+
+Spatial: Estados Unidos Mexicanos
+
+AccrualPeriodicity: Anualmente
+
+Distribution: https://www.inegi.org.mx/programas/molec/

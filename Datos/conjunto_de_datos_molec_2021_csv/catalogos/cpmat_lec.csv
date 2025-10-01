@@ -1,0 +1,5 @@
+CLAVE ,DESCRIPCION 
+1,Solo lee libros 
+2,Lee libros y demás materiales considerados por MOLEC 
+3,No lee libros pero si demás materiales considerados por MOLEC 
+4,No lee ningún tipo de lectura considerada por  MOLEC 

@@ -1,0 +1,7 @@
+CLAVE ,DESCRIPCION 
+1,diariamente?
+2,al menos una vez a la semana?
+3,al menos una vez al mes?
+4,al menos una vez al trimestre?
+5,ocasionalmente?
+blanco ,Blanco por pase 

@@ -1,0 +1,8 @@
+CLAVE ,DESCRIPCION 
+1,de 1 a 25 libros?
+2,de 26 a 50 libros?
+3,de 51 a 75 libros?
+4,de 76 a 100 libros?
+5,más de 100 libros?
+6,No recuerda
+blanco ,Blanco por pase 

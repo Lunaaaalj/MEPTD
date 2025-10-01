@@ -1,0 +1,37 @@
+Identifier: MEX-INEGI-ESD3.03-MOLEC-2020
+
+Title: Módulo sobre Lectura (MOLEC) 2020. Datos oportunos
+
+Description: El Módulo sobre Lectura, como módulo de la Encuesta Nacional sobre Confianza del Consumidor (ENCO), tiene la misma población objeto de estudio: personas de 18 y más años de edad que residen permanentemente en las viviendas particulares ubicadas en el territorio nacional en la fecha del levantamiento. Asimismo, dado que el objetivo de MOLEC es conocer la lectura de determinados materiales de la población de 18 y más años de edad, es indispensable que la persona que proporcione los datos del módulo sepa leer. 
+
+Objetivo general 
+El Módulo sobre Lectura comienza a levantar información en 2015. Este proyecto tiene el objetivo de generar información estadística sobre el comportamiento lector de la población residente habitual en México de 18 y más años de edad, con la finalidad de proporcionar datos útiles para conocer las características de la citada población y proporcionar elementos para el fomento de la lectura.
+
+Objetivos específicos 
+- Conocer las características principales de la lectura de libros, revistas, periódicos, historietas y páginas de Internet, foros o blogs.
+- Identificar particularidades de la lectura tales como: preferencia de soporte (impreso o digital), motivo principal por el cual se lee, modo de adquisición de los materiales, tipo de material y lugar de preferencia para realizarla.
+- Conocer generalidades de la lectura en México, tales como: duración de la sesión, velocidad de la lectura y comprensión de la misma de manera autopercibida.
+- Conocer si la población realiza alguna otra actividad mientras lee y si realiza una mayor búsqueda de información derivado de la lectura que realiza.
+- Identificar las condiciones favorables para estimular la práctica de la lectura.
+
+Modified: 2020-04-23
+
+Publisher: Instituto Nacional de Estadística y Geografía, INEGI
+
+Mbox: atencion.usuarios@inegi.org.mx
+
+License: https://www.inegi.org.mx/inegi/terminos.html
+
+DataDictionary: http://www3.inegi.org.mx/rnm/index.php/catalog/588/data_dictionary?idPro=
+
+Keyword: "biblioteca", "cultura", "enciclopedia", "encuesta", "hogar", "internet", "lectura", "librería", "libro", "periódico", "población", "prensa", "publicación"
+
+ContactPoint: Lic. José de Jesús Esquivel de la Rosa, 800 111 4634
+
+Temporal: 2020-02-01-2020-02-20
+
+Spatial: Estados Unidos Mexicanos
+
+AccrualPeriodicity: Anualmente
+
+Distribution: https://www.inegi.org.mx/programas/molec/default.html
