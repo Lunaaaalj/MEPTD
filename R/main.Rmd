@@ -1,3 +1,22 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = FALSE)
+
+```
+
+
+Juntando todos los datos de todos los años, se obtiene infofmacion relevante sobre la base de datos
+
+# Estructura:
+
+
+```{r}
 # Set working directory to the correct folder (Datos, not data)
 setwd("/Users/angelluna/Documents/STEM_PROJECTS/R_Projects_2/MEPTD/data")
 
@@ -19,8 +38,71 @@ df_2024 <- read.csv("conjunto_de_datos_molec_2024_02.csv")
 df <- bind_rows(df_2019, df_2020, df_2021, df_2022, df_2023, df_2024)
 
 # Display column names using cat() (preferred) or print()
-cat("Column names:\n")
-cat(colnames(df), "\n")
+
+# clean the data frame
+
+df_c = df[,c(4,104,105,107,85,86,87,89,11,17,18,33,34,52,53)]
+
+str(df_c)
 
 # Alternative: just use print() properly
 # print(colnames(df))
+```
+
+
+
+
+
+
+# Variables Incluidas:
+
+```{r}
+names(df_c)
+```
+
+Representan todas las preguntas del MOLEC cada una con un vector de respuesas asociado.
+
+
+# Primeras seis filas:
+
+
+```{r}
+head(df_c)
+```
+
+
+Estos son los primeros seis participantes de la encuesta.
+
+# Numero de columnas de la data frame:
+
+```{r}
+ncol(df_c)
+```
+
+
+Representa la cantidad de variables (preguntas) que hay en la encuesta
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
