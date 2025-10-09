@@ -26,6 +26,13 @@ if (!require(dplyr, quietly = TRUE)) {
   library(dplyr)
 }
 
+if(!require(ggplot2, quietly = TRUE)) {
+  install.packages("ggplot2")
+  library(ggplot2)
+}
+
+
+
 # Read CSV files individually first
 df_2019 <- read.csv("conjunto_de_datos_molec_2019_02.csv")
 df_2020 <- read.csv("conjunto_de_datos_molec_2020_02.csv")
