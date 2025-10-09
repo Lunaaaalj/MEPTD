@@ -70,6 +70,64 @@ nrow(df_c)
 
 # Datos faltantes
 
+Variables selectionadas:
+
+```{r}
+head(df_c)
+```
+
+A simple vista no se ven discrepancias en los datos
+
+```{r}
+summary(df_c)
+```
+
+No hay valores vacios
+
+```{r}
+colSums(is.na(df_c))
+```
+
+Chequeo de rango de los datos cuantitativos
+
+Edad:
+
+```{r}
+subset(df_c,edad <0)
+subset(df_c,edad>99)
+```
+
+Cantidad de libros leidos:
+
+```{r}
+subset(df_c,p4<0)
+subset(df_c,p4>70)
+```
+
+Revistas:
+
+```{r}
+subset(df_c,p10<0)
+subset(df_c,p10>25)
+```
+
+Periodicos:
+
+```{r}
+subset(df_c,p16<0)
+subset(df_c,p16>60)
+```
+
+Conclusion: no hay discrepancias en la base de datos que podrian afectar el analisis
+
+Prepararemos los datos para tener un mejor analisis, esto requiere que se combinen las columnas de la cantidad de libros, revistas y periodicos leidos en una sola columna mas general:
+
+```{r}
+df_c$TL=(df_c$p4+df_c$p10+df_c$p16)
+head(df_c)
+```
+
+
 # Descripción de variables
 
 # Exploracion de datos
