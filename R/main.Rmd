@@ -76,7 +76,7 @@ Variables selectionadas:
 head(df_c)
 ```
 
-A simple vista no se ven discrepancias en los datos
+Analizando el sumario, no se notan discrepancias en los valores
 
 ```{r}
 summary(df_c)
@@ -141,6 +141,56 @@ head(df_c)
 ## Herramientas de visualizacion
 
 ### Variables cuantitativas
+
+Grafica de dispersion: Textos leidos vs edad
+
+```{r}
+ggplot(data = df_c[,c("edad","TL")], aes(x=edad,y=TL)) +
+        geom_jitter(size = 0.9)
+```
+
+
+Gran cantidad de valores atipicos, mayor densidad cerca del 0, se nota una baja o nula coorrelacion debido a que es constante cerca del cero
+
+
+
+
+Grafica de barras: Textos leidos vs cantidad de gente
+
+
+
+```{r}
+ggplot(data = df_c[,c("edad","TL")], aes(x=TL)) +
+        geom_bar() +
+        stat_function(fun = dnorm,args = list(mean = mean(df_c$TL), sd = sd(df_c$TL)), linewidth = 1) +
+        xlim(0,30) +
+        ylim(0,1500) +
+        geom_vline(xintercept =mean(df_c$TL), aes(x = TL),color = "red",linewidth=1.3)
+```
+
+
+Densidad de cantidad de libros leidos
+
+```{r}
+ggplot(data = df_c, aes(x = TL)) +
+        geom_density(alpha= 1) +
+        xlim(0,50)
+```
+
+
+Distribucion asimetrica con sesgo a la izquierda
+
+Boxplot:
+
+```{r}
+ggplot(data = df_c, aes(x = TL, y = edad)) +
+        geom_boxplot(fill = "red") +
+        geom_point(alpha = 0.3)
+```
+
+### Análisis de coorrelacion
+
+
 
 ### Variables categoricas
 
