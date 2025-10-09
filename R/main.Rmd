@@ -130,6 +130,8 @@ head(df_c)
 
 # Descripción de variables
 hola
+
+variable
 # Exploracion de datos
 
 ## Calculo de medias estadisticas
