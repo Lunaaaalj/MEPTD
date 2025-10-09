@@ -55,41 +55,6 @@ str(df_c)
 
 
 
-# Variables Incluidas:
-
-```{r}
-names(df_c)
-```
-
-Representan todas las preguntas del MOLEC cada una con un vector de respuesas asociado.
-
-
-# Primeras seis filas:
-
-
-```{r}
-head(df_c)
-```
-
-
-Estos son los primeros seis participantes de la encuesta.
-
-# Numero de columnas de la data frame:
-
-```{r}
-ncol(df_c)
-```
-
-
-Representa la cantidad de variables (preguntas) que hay en la encuesta
-
-
-
-
-
-
-
-
 
 
 
