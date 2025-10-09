@@ -58,7 +58,33 @@ str(df_c)
 ```
 
 
+# Dimensión del data frame
 
+# Datos faltantes
+
+# Descripción de variables
+
+# Exploracion de datos
+
+## Calculo de medias estadisticas
+
+### Variables cuantitativas
+
+### Variables cualitativas
+
+## Herramientas de visualizacion
+
+### Variables cuantitativas
+
+### Variables categoricas
+
+# Vinculacion de datos categoricos
+
+## Medidas de variables cuantitativas
+
+## Graficos cuantitativos
+
+## Graficos comparativos
 
 
 
