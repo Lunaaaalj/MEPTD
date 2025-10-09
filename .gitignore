@@ -1,6 +1,6 @@
 # Intelij IDEA directories
-/.idea/
+.idea/
 
 # in the R directory
 
-/R/.idea/
+R/.idea/
