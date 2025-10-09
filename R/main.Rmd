@@ -60,6 +60,14 @@ str(df_c)
 
 # Dimensión del data frame
 
+Para encontrar la cantidad de columnas y renglones del data frame se usan las funciones de ncol y nrow
+
+```{r}
+ncol(df_c)
+nrow(df_c)
+```
+
+
 # Datos faltantes
 
 # Descripción de variables
