@@ -182,13 +182,11 @@ Grafica de dispersion: Textos leidos vs edad
 
 ```{r}
 ggplot(data = df_c[,c("edad","TL")], aes(x=edad,y=TL)) +
-        geom_jitter(size = 0.9)
+        geom_jitter(size = 0.7)
 ```
 
 
 Gran cantidad de valores atipicos, mayor densidad cerca del 0, se nota una baja o nula coorrelacion debido a que es constante cerca del cero
-
-
 
 
 Grafica de barras: Textos leidos vs cantidad de gente
@@ -220,15 +218,57 @@ Boxplot:
 
 ```{r}
 ggplot(data = df_c, aes(x = TL, y = edad)) +
-        geom_boxplot(fill = "red") +
-        geom_point(alpha = 0.3)
+        geom_boxplot(fill = "red")
 ```
 
-### Análisis de coorrelacion
+### Análisis de correlacion
 
+Como ya se vio en las graficas anteriores, la probabilidad que haya una correlacion entre la edad y la cantidad de textos leidos de una persona es muy baja. Tambien se puede calcular con la funcion cor(), con esta se observa que la correlacion es virtualmente nula.
+
+```{r}
+cor(df_c$TL,df_c$edad)
+```
 
 
 ### Variables categoricas
+
+Cantidad de personas que fueron a una libreria en su infancia
+
+```{r}
+yes_people=nrow(subset(df_c,p34_1==1))
+no_people=nrow(subset(df_c,p34_1==2))
+other = nrow(df_c)-yes_people-no_people
+vec=c(yes_people,no_people,other)
+labels=c("Yes","No","Other")
+pie(vec,labels)
+```
+
+
+
+
+
+Nuestro objetivo es analizar como se relacionan las tendencias de lectura con variables categoricas como la manera en la que desarrollaron su infancia y educacion.
+
+A continuacion se realizan graficos de dispersion relacionando las variables categoricas con la cantidad de textos leidos
+
+
+```{r}
+ggplot(df_c, aes(x = df_c$p34_1, y = df_c$TL)) +
+        geom_point(position = position_jitter(width = 0.1), alpha = 0.5) +
+        labs(title = "lo llevaban a bibliotecas o librerias?",
+              x = "1: si, 2: no, otros: nulos", y =  "Cantidad de textos leidos")
+```
+
+Porcentaje de personas que acostumbran leer
+
+
+```{r}
+ggplot(df_c, aes(x = p2)) +
+        geom_bar() +
+        labs(title = "Acostumbra leer?", y = "cantidad de personas", xv="1: si, 2: no, 0: nulo")
+```
+
+
 
 # Vinculacion de datos categoricos
 
