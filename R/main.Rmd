@@ -203,10 +203,10 @@ rm_TL = (min(df_c$TL)+max(df_c$TL))/2
 
 # Generamos una tabla que nos da el resumen final de las medidas de tendencia central
 resumen_tendencia_central = data.frame(
-nombreVariable = c("Edad", "Libros(p4)", "Revistas(p10)", "Periódicos(p16)", "Total leído(TL)"),
-media = c(media_edad, media_p4, media_p10, media_p16, media_TL),
-mediana = c(mediana_edad, mediana_p4, mediana_p10, mediana_p16, mediana_TL),
-rangoMedio = c(rm_edad, rm_p4, rm_p10, rm_p16, rm_TL)
+  nombreVariable = c("Edad", "Libros(p4)", "Revistas(p10)", "Periódicos(p16)", "Total leído(TL)"),
+  media = c(media_edad, media_p4, media_p10, media_p16, media_TL),
+  mediana = c(mediana_edad, mediana_p4, mediana_p10, mediana_p16, mediana_TL),
+  rangoMedio = c(rm_edad, rm_p4, rm_p10, rm_p16, rm_TL)
 )
 
 # ----MEDIDAS DE DISPERSIÓN----
@@ -232,10 +232,10 @@ coefvar_TL = (sd(df_c$TL)/mean(df_c$TL))*100
 
 # Generamos una tabla que nos da el resumen final de las medidas de dispersión
 resumen_dispersion = data.frame(
-nombreVariable = c("Edad", "Libros(p4)", "Revistas(p10)", "Periódicos(p16)", "Total leído(TL)"),
-desviacionEstandar = c(sd_edad, sd_p4, sd_p10, sd_p16, sd_TL),
-varianza = c(var_edad, var_p4, var_p10, var_p16, var_TL),
-coefVariacion = c(coefvar_edad, coefvar_p4, coefvar_p10, coefvar_p16, coefvar_TL)
+  nombreVariable = c("Edad", "Libros(p4)", "Revistas(p10)", "Periódicos(p16)", "Total leído(TL)"),
+  desviacionEstandar = c(sd_edad, sd_p4, sd_p10, sd_p16, sd_TL),
+  varianza = c(var_edad, var_p4, var_p10, var_p16, var_TL),
+  coefVariacion = c(coefvar_edad, coefvar_p4, coefvar_p10, coefvar_p16, coefvar_TL)
 )
 
 # ----MEDIDAS DE POSICIÓN----
@@ -263,10 +263,10 @@ Q3_TL = quantile(df_c$TL, probs = 0.75)
 
 # Generamos una tabla que nos da el resumen final de las medidas de posición
 resumen_posicion = data.frame(
-nombreVariable = c("Edad", "Libros(p4)", "Revistas(p10)", "Periódicos(p16)", "Total leído(TL)"),
-Q1_0.25 = c(Q1_edad, Q1_p4, Q1_p10, Q1_p16, Q1_TL),
-Q2_0.5 = c(Q2_edad, Q2_p4, Q2_p10, Q2_p16, Q2_TL),
-Q3_0.75 = c(Q3_edad, Q3_p4, Q3_p10, Q3_p16, Q3_TL)
+  nombreVariable = c("Edad", "Libros(p4)", "Revistas(p10)", "Periódicos(p16)", "Total leído(TL)"),
+  Q1_0.25 = c(Q1_edad, Q1_p4, Q1_p10, Q1_p16, Q1_TL),
+  Q2_0.5 = c(Q2_edad, Q2_p4, Q2_p10, Q2_p16, Q2_TL),
+  Q3_0.75 = c(Q3_edad, Q3_p4, Q3_p10, Q3_p16, Q3_TL)
 )
 
 # ----MEDIDAS DE FORMA----
@@ -287,25 +287,243 @@ curtosis_TL = kurtosis(df_c$TL)
 
 # Generamos una tabla que nos da el resumen final de las medidas de forma
 resumen_medidas_forma = data.frame(
-nombreVariable = c("Edad", "Libros(p4)", "Revistas(p10)", "Periódicos(p16)", "Total leído(TL)"),
-Sesgo = c(sesgo_edad, sesgo_p4, sesgo_p10, sesgo_p16, sesgo_TL),
-Curtosis = c(curtosis_edad, curtosis_p4, curtosis_p10, curtosis_p16, curtosis_TL)
+  nombreVariable = c("Edad", "Libros(p4)", "Revistas(p10)", "Periódicos(p16)", "Total leído(TL)"),
+  Sesgo = c(sesgo_edad, sesgo_p4, sesgo_p10, sesgo_p16, sesgo_TL),
+  Curtosis = c(curtosis_edad, curtosis_p4, curtosis_p10, curtosis_p16, curtosis_TL)
 )
 
 # ----IMPRIMIR RESULTADOS----
 
-#Imprimimos el resumen de las medidas de tendencia central
+# Imprimimos el resumen de las medidas de tendencia central
 print(resumen_tendencia_central)
-#Imprimimos el resumen de las medidas de dispersión
+# Imprimimos el resumen de las medidas de dispersión
 print(resumen_dispersion)
-#Imprimimos el resumen de las medidas de posición
+# Imprimimos el resumen de las medidas de posición
 print(resumen_posicion)
-#Imprimimos el resumen de las medidas de forma
+# Imprimimos el resumen de las medidas de forma
 print(resumen_medidas_forma)
 
 ```
 
 ### Variables cualitativas
+```{r}
+# ---- PREPARACIÓN DE VARIABLES CUALITATIVAS ----
+
+# Convertimos las variables a "factor" para que R las entienda como categorías
+df_c$sexo = as.factor(df_c$sexo)
+df_c$entidad = as.factor(df_c$entidad)
+df_c$p34_1 = as.factor(df_c$p34_1)
+df_c$p34_2 = as.factor(df_c$p34_2)
+df_c$p34_3 = as.factor(df_c$p34_3)
+df_c$p34_4 = as.factor(df_c$p34_4)
+df_c$p2 = as.factor(df_c$p2)
+df_c$p5 = as.factor(df_c$p5)
+df_c$p11 = as.factor(df_c$p11)
+df_c$p17 = as.factor(df_c$p17)
+
+```
+
+```{r}
+# ---- ANÁLISIS DE FRECUENCIA: SEXO ----
+
+# Recodificamos la variable con etiquetas claras
+sexo_factor = factor(df_c$sexo, levels = c(1, 2), labels = c("Hombre", "Mujer"))
+
+# Calculamos la tabla de frecuencia absoluta (conteo)
+frecuencias_sexo = table(sexo_factor)
+
+# Generamos la tabla de resumen completa
+resumen_sexo = data.frame(
+  Categoria = names(frecuencias_sexo),
+  Frecuencia = as.vector(frecuencias_sexo),
+  Porcentaje = round(prop.table(frecuencias_sexo) * 100, 2)
+)
+
+# Mostramos la tabla
+print("Tabla de Frecuencias: SEXO")
+print(resumen_sexo)
+
+```
+
+
+```{r}
+# ---- ANÁLISIS DE FRECUENCIA: ENTIDAD ----
+
+# Calculamos la tabla de frecuencia absoluta
+frecuencias_entidad = table(df_c$entidad)
+
+# Generamos la tabla de resumen completa
+resumen_entidad = data.frame(
+  Codigo_Entidad = names(frecuencias_entidad),
+  Frecuencia = as.vector(frecuencias_entidad),
+  Porcentaje = round(prop.table(frecuencias_entidad) * 100, 2)
+)
+
+# Mostramos los primeros 10 resultados de la tabla
+print("Tabla de Frecuencias: ENTIDAD (primeros 10 de 32)")
+print(resumen_entidad)
+```
+```{r}
+# ---- ANÁLISIS DE FRECUENCIA: P34_1 (Llevaban a bibliotecas) ----
+
+# Recodificamos la variable con etiquetas claras
+p34_1_factor = factor(df_c$p34_1, levels = c(1, 2, 3), labels = c("Sí", "No", "No recuerda"))
+
+# Calculamos la tabla de frecuencia absoluta
+frecuencias_p34_1 = table(p34_1_factor)
+
+# Generamos la tabla de resumen completa
+resumen_p34_1 = data.frame(
+  Categoria = names(frecuencias_p34_1),
+  Frecuencia = as.vector(frecuencias_p34_1),
+  Porcentaje = round(prop.table(frecuencias_p34_1) * 100, 2)
+)
+
+# Mostramos la tabla
+print("Tabla de Frecuencias: P34_1 (Llevaban a bibliotecas)")
+print(resumen_p34_1)
+```
+```{r}
+# ---- ANÁLISIS DE FRECUENCIA: P34_2 (veía a sus padres o tutores leer) ----
+
+# Recodificamos la variable con etiquetas claras
+p34_2_factor = factor(df_c$p34_2, levels = c(1, 2, 3), labels = c("Sí", "No", "No recuerda"))
+
+# Calculamos la tabla de frecuencia absoluta
+frecuencias_p34_2 = table(p34_2_factor)
+
+# Generamos la tabla de resumen completa
+resumen_p34_2 = data.frame(
+  Categoria = names(frecuencias_p34_2),
+  Frecuencia = as.vector(frecuencias_p34_2),
+  Porcentaje = round(prop.table(frecuencias_p34_2) * 100, 2)
+)
+
+# Mostramos la tabla
+print("Tabla de Frecuencias: P34_2 (veía a sus padres o tutores leer)")
+print(resumen_p34_2)
+```
+```{r}
+# ---- ANÁLISIS DE FRECUENCIA: P34_3 (Sus padres o tutores le leían en voz alta) ----
+
+# Recodificamos la variable con etiquetas claras
+p34_3_factor = factor(df_c$p34_3, levels = c(1, 2, 3), labels = c("Sí", "No", "No recuerda"))
+
+# Calculamos la tabla de frecuencia absoluta
+frecuencias_p34_3 = table(p34_3_factor)
+
+# Generamos la tabla de resumen completa
+resumen_p34_3 = data.frame(
+  Categoria = names(frecuencias_p34_3),
+  Frecuencia = as.vector(frecuencias_p34_3),
+  Porcentaje = round(prop.table(frecuencias_p34_3) * 100, 2)
+)
+
+# Mostramos la tabla
+print("Tabla de Frecuencias: P34_3 (sus padres o tutores le leían en voz alta)")
+print(resumen_p34_2)
+```
+```{r}
+# ---- ANÁLISIS DE FRECUENCIA: P34_4 (en su casa había libros distintos a los de texto escolar) ----
+
+# Recodificamos la variable con etiquetas claras
+p34_4_factor = factor(df_c$p34_4, levels = c(1, 2, 3), labels = c("Sí", "No", "No recuerda"))
+
+# Calculamos la tabla de frecuencia absoluta
+frecuencias_p34_4 = table(p34_4_factor)
+
+# Generamos la tabla de resumen completa
+resumen_p34_4 = data.frame(
+  Categoria = names(frecuencias_p34_4),
+  Frecuencia = as.vector(frecuencias_p34_4),
+  Porcentaje = round(prop.table(frecuencias_p34_4) * 100, 2)
+)
+
+# Mostramos la tabla
+print("Tabla de Frecuencias: P34_3 (en su casa había libros distintos a los de texto escolar)")
+print(resumen_p34_4)
+```
+```{r}
+# ---- ANÁLISIS DE FRECUENCIA: P2 (Acostumbra leer) ----
+
+# Recodificamos la variable con etiquetas claras
+p2_factor = factor(df_c$p2, levels = c(1, 2), labels = c("Sí", "No"))
+
+# Calculamos la tabla de frecuencia absoluta
+frecuencias_p2 = table(p2_factor)
+
+# Generamos la tabla de resumen completa
+resumen_p2 = data.frame(
+  Categoria = names(frecuencias_p2),
+  Frecuencia = as.vector(frecuencias_p2),
+  Porcentaje = round(prop.table(frecuencias_p2) * 100, 2)
+)
+
+# Mostramos la tabla
+print("Tabla de Frecuencias: P2 (Acostumbra leer)")
+print(resumen_p2)
+```
+```{r}
+# ---- ANÁLISIS DE FRECUENCIA: P5 (Motivo de lectura de libros) ----
+
+# Recodificamos la variable con etiquetas claras
+p5_factor = factor(df_c$p5, levels = c(1, 2, 3, 4, 5, 6), labels = c("Trabajo", "Estudio", "Cultura General", "Gusto/Entretenimiento", "Religión", "Otro"))
+
+# Calculamos la tabla de frecuencia absoluta
+frecuencias_p5 = table(p5_factor)
+
+# Generamos la tabla de resumen completa
+resumen_p5 = data.frame(
+  Categoria = names(frecuencias_p5),
+  Frecuencia = as.vector(frecuencias_p5),
+  Porcentaje = round(prop.table(frecuencias_p5) * 100, 2)
+)
+
+# Mostramos la tabla
+print("Tabla de Frecuencias: P5 (Motivo lectura libros)")
+print(resumen_p5)
+```
+```{r}
+# ---- ANÁLISIS DE FRECUENCIA: P11 (Motivo de lectura de revistas) ----
+
+# Recodificamos la variable con etiquetas claras
+p11_factor = factor(df_c$p11, levels = c(1, 2, 3, 4, 5, 6), labels = c("Trabajo", "Estudio", "Cultura General", "Gusto/Entretenimiento", "Religión", "Otro"))
+
+# Calculamos la tabla de frecuencia absoluta
+frecuencias_p11 = table(p11_factor)
+
+# Generamos la tabla de resumen completa
+resumen_p11 = data.frame(
+  Categoria = names(frecuencias_p11),
+  Frecuencia = as.vector(frecuencias_p11),
+  Porcentaje = round(prop.table(frecuencias_p11) * 100, 2)
+)
+
+# Mostramos la tabla
+print("Tabla de Frecuencias: P11 (Motivo lectura de revistas)")
+print(resumen_p11)
+```
+```{r}
+# ---- ANÁLISIS DE FRECUENCIA: P17 (Motivo de lectura de periódicos) ----
+
+# Recodificamos la variable con etiquetas claras
+p17_factor = factor(df_c$p17, levels = c(1, 2, 3, 4, 5, 6), labels = c("Trabajo", "Estudio", "Cultura General", "Gusto/Entretenimiento", "Religión", "Otro"))
+
+# Calculamos la tabla de frecuencia absoluta
+frecuencias_p17 = table(p17_factor)
+
+# Generamos la tabla de resumen completa
+resumen_p17 = data.frame(
+  Categoria = names(frecuencias_p17),
+  Frecuencia = as.vector(frecuencias_p17),
+  Porcentaje = round(prop.table(frecuencias_p17) * 100, 2)
+)
+
+# Mostramos la tabla
+print("Tabla de Frecuencias: P17 (Motivo lectura de periódicos)")
+print(resumen_p17)
+```
+
 
 ## Herramientas de visualizacion
 
