@@ -18,7 +18,10 @@ Juntando todos los datos de todos los años, se obtiene infofmacion relevante so
 
 ```{r}
 # Set working directory to the correct folder (Datos, not data)
-setwd("/Users/angelluna/Documents/STEM_PROJECTS/R_Projects_2/MEPTD/data")
+#setwd("/Users/angelluna/Documents/STEM_PROJECTS/R_Projects_2/MEPTD/data")
+
+# Set working directory (Rafael)
+setwd("/Users/hisen/OneDrive/Documentos/ProyectosR_Estadistica3ro/MEPTD/Data")
 
 # Install and load required library for combining data frames
 if (!require(dplyr, quietly = TRUE)) {
@@ -31,7 +34,11 @@ if(!require(ggplot2, quietly = TRUE)) {
   library(ggplot2)
 }
 
-
+# Para las medidas de forma 
+if(!require(moments, quietly = TRUE)) {
+  install.packages("moments")
+  library(moments)
+}
 
 # Read CSV files individually first
 df_2019 <- read.csv("conjunto_de_datos_molec_2019_02.csv")
@@ -55,6 +62,7 @@ str(df_c)
 # Alternative: just use print() properly
 # print(colnames(df))
 # Hola, este es mi cambio
+# Segundo cambio
 ```
 
 
@@ -130,11 +138,136 @@ head(df_c)
 
 # Descripción de variables
 
-# Exploracion de datos
+# A. Exploracion de datos
 
-## Calculo de medias estadisticas
+## 1. Calculo de medias estadisticas
 
 ### Variables cuantitativas
+```{r}
+# ----MEDIDAS DE TENDENCIA CENTRAL----
+
+# Media
+media_edad = mean(df_c$edad)
+media_p4 = mean(df_c$p4)
+media_p10 = mean(df_c$p10)
+media_p16 = mean(df_c$p16)
+media_TL = mean(df_c$TL)
+# Mediana
+mediana_edad = median(df_c$edad)
+mediana_p4 = median(df_c$p4)
+mediana_p10 = median(df_c$p10)
+mediana_p16 = median(df_c$p16)
+mediana_TL = median(df_c$TL)
+# Rango medio
+rm_edad = (min(df_c$edad)+max(df_c$edad))/2
+rm_p4 = (min(df_c$p4)+max(df_c$p4))/2
+rm_p10 = (min(df_c$p10)+max(df_c$p10))/2
+rm_p16 = (min(df_c$p16)+max(df_c$p16))/2
+rm_TL = (min(df_c$TL)+max(df_c$TL))/2
+
+# Generamos una tabla que nos da el resumen final de las medidas de tendencia central
+resumen_tendencia_central = data.frame(
+nombreVariable = c("Edad", "Libros(p4)", "Revistas(p10)", "Periódicos(p16)", "Total leído(TL)"),
+media = c(media_edad, media_p4, media_p10, media_p16, media_TL),
+mediana = c(mediana_edad, mediana_p4, mediana_p10, mediana_p16, mediana_TL),
+rangoMedio = c(rm_edad, rm_p4, rm_p10, rm_p16, rm_TL)
+)
+
+# ----MEDIDAS DE DISPERSIÓN----
+
+# Desviación estándar
+sd_edad = sd(df_c$edad)
+sd_p4 = sd(df_c$p4)
+sd_p10 = sd(df_c$p10)
+sd_p16 = sd(df_c$p16)
+sd_TL = sd(df_c$TL)
+# Varianza
+var_edad = var(df_c$edad)
+var_p4 = var(df_c$p4)
+var_p10 = var(df_c$p10)
+var_p16 = var(df_c$p16)
+var_TL = var(df_c$TL)
+# Coeficiente de variación
+coefvar_edad = (sd(df_c$edad)/mean(df_c$edad))*100
+coefvar_p4 = (sd(df_c$p4)/mean(df_c$p4))*100
+coefvar_p10 = (sd(df_c$p10)/mean(df_c$p10))*100
+coefvar_p16 = (sd(df_c$p16)/mean(df_c$p16))*100
+coefvar_TL = (sd(df_c$TL)/mean(df_c$TL))*100
+
+# Generamos una tabla que nos da el resumen final de las medidas de dispersión
+resumen_dispersion = data.frame(
+nombreVariable = c("Edad", "Libros(p4)", "Revistas(p10)", "Periódicos(p16)", "Total leído(TL)"),
+desviacionEstandar = c(sd_edad, sd_p4, sd_p10, sd_p16, sd_TL),
+varianza = c(var_edad, var_p4, var_p10, var_p16, var_TL),
+coefVariacion = c(coefvar_edad, coefvar_p4, coefvar_p10, coefvar_p16, coefvar_TL)
+)
+
+# ----MEDIDAS DE POSICIÓN----
+
+# Cuartil 1
+Q1_edad = quantile(df_c$edad, probs = 0.25)
+Q1_p4 = quantile(df_c$p4, probs = 0.25)
+Q1_p10 = quantile(df_c$p10, probs = 0.25)
+Q1_p16 = quantile(df_c$p16, probs = 0.25)
+Q1_TL = quantile(df_c$TL, probs = 0.25)
+
+# Cuartil 2
+Q2_edad = quantile(df_c$edad, probs = 0.5)
+Q2_p4 = quantile(df_c$p4, probs = 0.5)
+Q2_p10 = quantile(df_c$p10, probs = 0.5)
+Q2_p16 = quantile(df_c$p16, probs = 0.5)
+Q2_TL = quantile(df_c$TL, probs = 0.5)
+
+# Cuartil 1
+Q3_edad = quantile(df_c$edad, probs = 0.75)
+Q3_p4 = quantile(df_c$p4, probs = 0.75)
+Q3_p10 = quantile(df_c$p10, probs = 0.75)
+Q3_p16 = quantile(df_c$p16, probs = 0.75)
+Q3_TL = quantile(df_c$TL, probs = 0.75)
+
+# Generamos una tabla que nos da el resumen final de las medidas de posición
+resumen_posicion = data.frame(
+nombreVariable = c("Edad", "Libros(p4)", "Revistas(p10)", "Periódicos(p16)", "Total leído(TL)"),
+Q1_0.25 = c(Q1_edad, Q1_p4, Q1_p10, Q1_p16, Q1_TL),
+Q2_0.5 = c(Q2_edad, Q2_p4, Q2_p10, Q2_p16, Q2_TL),
+Q3_0.75 = c(Q3_edad, Q3_p4, Q3_p10, Q3_p16, Q3_TL)
+)
+
+# ----MEDIDAS DE FORMA----
+
+# Sesgo
+sesgo_edad = skewness(df_c$edad)
+sesgo_p4 = skewness(df_c$p4)
+sesgo_p10 = skewness(df_c$p10)
+sesgo_p16 = skewness(df_c$p16)
+sesgo_TL = skewness(df_c$TL)
+
+#Curtosis
+curtosis_edad = kurtosis(df_c$edad)
+curtosis_p4 = kurtosis(df_c$p4)
+curtosis_p10 = kurtosis(df_c$p10)
+curtosis_p16 = kurtosis(df_c$p16)
+curtosis_TL = kurtosis(df_c$TL)
+
+# Generamos una tabla que nos da el resumen final de las medidas de forma
+resumen_medidas_forma = data.frame(
+nombreVariable = c("Edad", "Libros(p4)", "Revistas(p10)", "Periódicos(p16)", "Total leído(TL)"),
+Sesgo = c(sesgo_edad, sesgo_p4, sesgo_p10, sesgo_p16, sesgo_TL),
+Curtosis = c(curtosis_edad, curtosis_p4, curtosis_p10, curtosis_p16, curtosis_TL)
+)
+
+# ----IMPRIMIR RESULTADOS----
+
+#Imprimimos el resumen de las medidas de tendencia central
+print(resumen_tendencia_central)
+#Imprimimos el resumen de las medidas de dispersión
+print(resumen_dispersion)
+#Imprimimos el resumen de las medidas de posición
+print(resumen_posicion)
+#Imprimimos el resumen de las medidas de forma
+print(resumen_medidas_forma)
+
+```
 
 ### Variables cualitativas
 
