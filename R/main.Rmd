@@ -129,6 +129,42 @@ head(df_c)
 
 
 # Descripción de variables
+Las variables utilizadas se describen a continuación en orden lógico.
+
+Edad: Esta variable indica cuántos años tiene el encuestado, se describe como cuantitativa y es fundamental para nuestro trabajo, ya que la encuesta MOLEC se aplica a partir de una cierta edad. En ella podemos ver que el hábito de lectura varía según la etapa de vida, lo que nos permite distinguir si los estímulos afectan de manera similar a jóvenes o adultos.
+
+Sexo: Este funciona para distinguir a hombres de mujeres. La variable es categórica y es utilizada como factor de control. En las investigaciones se encuentra evidencia de que existen diferencias en los hábitos de lectura. Es importante incluirla para evitar confundir el efecto de la infancia con sesgos de género.
+
+Nivel: Esta variable muestra el nivel educativo alcanzado por las personas. También es categórica, pero indispensable, ya que se suele considerar a la educación como el factor más relevante al momento de analizar los hábitos de lectura. En nuestro proyecto funcionará como variable de control para comprobar si, aunque se tenga educación, los estímulos de la infancia tienen efectos.
+
+Entidad: Este se refiere al estado de residencia de las personas. La consideramos porque la disponibilidad de materiales de lectura varía entre regiones. Al ocupar esta variable, nos permite descartar que las diferencias sean por desigualdades regionales.
+
+P34_1: “Cuando era niño(a), ¿lo llevaban a bibliotecas o librerías?”
+Esta es una variable categórica que nos enseña la exposición infantil a espacios en los cuales se fomentaba la lectura. Es funcional para indicar si la familia promovía la lectura fuera de la escuela como parte de su cultura.
+
+P34_2: “Cuando era niño(a), ¿veía a sus padres o tutores leer?”
+Variable categórica que mide el nivel de lectura en el hogar, ya que ver a los padres leer es un gran ejemplo que influye en la formación del hábito de la lectura de las personas.
+
+P34_3: “Cuando era niño(a), ¿sus padres o tutores le leían en voz alta?”
+Otra variable categórica en la cual se tiene una exposición directa con la lectura durante la infancia. Esta práctica es conocida por su impacto en el desarrollo cognitivo y se puede considerar un estímulo clave en la lectura.
+
+P34_4: “En su casa, ¿había libros distintos a los de texto escolar?”
+Variable categórica que nos indica la cantidad de libros que hay en cada hogar, ya que esto representa un recurso material que puede influir en el interés por leer a edad temprana.
+
+P2: “¿Usted acostumbra leer?”
+Una variable categórica que funciona como un filtro principal para conocer el hábito lector de las personas. Con esto podemos identificar a quienes practican la lectura y a quienes no.
+
+P4: “¿Cuántos libros leyó en los últimos doce meses?”
+Esta es una variable cuantitativa que nos indica la intensidad del hábito lector. Además de mostrar si las personas leen, también nos dice la cantidad de libros que consumen al año.
+
+P5: “¿Cuál fue el principal motivo por el que leyó libros?”
+Variable categórica importante, ya que es un gran indicador dentro del análisis. Con esto podemos identificar a las personas que leen por placer o a quienes lo hacen por trabajo.
+
+P10 y P11: “¿Cuántas revistas leyó en los últimos tres meses?” y “¿Cuál fue el motivo principal por el que leyó estas revistas?”
+Estas variables pueden funcionar como complementarias y permiten observar la lectura de revistas como parte del hábito lector. Es importante porque muchas personas tienen interés en leer materiales impresos o de tendencia.
+
+P16 y P17: “¿Cuántos periódicos leyó la semana pasada?” y “¿Cuál fue el motivo principal por el que leyó el (los) periódico(s)?”
+Esta variable es complementaria, ya que nos permite analizar la lectura de prensa, lo que enriquece la visión de los hábitos de lectura. Con esto observamos que existe una gran diversidad de medios en los cuales se manifiesta la práctica lectora.
 
 # Exploracion de datos
 
