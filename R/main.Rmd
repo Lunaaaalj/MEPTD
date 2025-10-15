@@ -10,18 +10,16 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ```
 
-
 Juntando todos los datos de todos los años, se obtiene infofmacion relevante sobre la base de datos
 
 # Estructura:
-
 
 ```{r}
 # Set working directory to the correct folder (Datos, not data)
 #setwd("/Users/angelluna/Documents/STEM_PROJECTS/R_Projects_2/MEPTD/data")
 
 # Set working directory (Rafael)
-setwd("/Users/hisen/OneDrive/Documentos/ProyectosR_Estadistica3ro/MEPTD/Data")
+setwd("/data")
 
 # Install and load required library for combining data frames
 if (!require(dplyr, quietly = TRUE)) {
@@ -65,7 +63,6 @@ str(df_c)
 # Segundo cambio
 ```
 
-
 # Dimensión del data frame
 
 Para encontrar la cantidad de columnas y renglones del data frame se usan las funciones de ncol y nrow
@@ -74,7 +71,6 @@ Para encontrar la cantidad de columnas y renglones del data frame se usan las fu
 ncol(df_c)
 nrow(df_c)
 ```
-
 
 # Datos faltantes
 
@@ -135,8 +131,8 @@ df_c$TL=(df_c$p4+df_c$p10+df_c$p16)
 head(df_c)
 ```
 
-
 # Descripción de variables
+
 Las variables utilizadas se describen a continuación en orden lógico.
 
 Edad: Esta variable indica cuántos años tiene el encuestado, se describe como cuantitativa y es fundamental para nuestro trabajo, ya que la encuesta MOLEC se aplica a partir de una cierta edad. En ella podemos ver que el hábito de lectura varía según la etapa de vida, lo que nos permite distinguir si los estímulos afectan de manera similar a jóvenes o adultos.
@@ -147,38 +143,30 @@ Nivel: Esta variable muestra el nivel educativo alcanzado por las personas. Tamb
 
 Entidad: Este se refiere al estado de residencia de las personas. La consideramos porque la disponibilidad de materiales de lectura varía entre regiones. Al ocupar esta variable, nos permite descartar que las diferencias sean por desigualdades regionales.
 
-P34_1: “Cuando era niño(a), ¿lo llevaban a bibliotecas o librerías?”
-Esta es una variable categórica que nos enseña la exposición infantil a espacios en los cuales se fomentaba la lectura. Es funcional para indicar si la familia promovía la lectura fuera de la escuela como parte de su cultura.
+P34_1: “Cuando era niño(a), ¿lo llevaban a bibliotecas o librerías?” Esta es una variable categórica que nos enseña la exposición infantil a espacios en los cuales se fomentaba la lectura. Es funcional para indicar si la familia promovía la lectura fuera de la escuela como parte de su cultura.
 
-P34_2: “Cuando era niño(a), ¿veía a sus padres o tutores leer?”
-Variable categórica que mide el nivel de lectura en el hogar, ya que ver a los padres leer es un gran ejemplo que influye en la formación del hábito de la lectura de las personas.
+P34_2: “Cuando era niño(a), ¿veía a sus padres o tutores leer?” Variable categórica que mide el nivel de lectura en el hogar, ya que ver a los padres leer es un gran ejemplo que influye en la formación del hábito de la lectura de las personas.
 
-P34_3: “Cuando era niño(a), ¿sus padres o tutores le leían en voz alta?”
-Otra variable categórica en la cual se tiene una exposición directa con la lectura durante la infancia. Esta práctica es conocida por su impacto en el desarrollo cognitivo y se puede considerar un estímulo clave en la lectura.
+P34_3: “Cuando era niño(a), ¿sus padres o tutores le leían en voz alta?” Otra variable categórica en la cual se tiene una exposición directa con la lectura durante la infancia. Esta práctica es conocida por su impacto en el desarrollo cognitivo y se puede considerar un estímulo clave en la lectura.
 
-P34_4: “En su casa, ¿había libros distintos a los de texto escolar?”
-Variable categórica que nos indica la cantidad de libros que hay en cada hogar, ya que esto representa un recurso material que puede influir en el interés por leer a edad temprana.
+P34_4: “En su casa, ¿había libros distintos a los de texto escolar?” Variable categórica que nos indica la cantidad de libros que hay en cada hogar, ya que esto representa un recurso material que puede influir en el interés por leer a edad temprana.
 
-P2: “¿Usted acostumbra leer?”
-Una variable categórica que funciona como un filtro principal para conocer el hábito lector de las personas. Con esto podemos identificar a quienes practican la lectura y a quienes no.
+P2: “¿Usted acostumbra leer?” Una variable categórica que funciona como un filtro principal para conocer el hábito lector de las personas. Con esto podemos identificar a quienes practican la lectura y a quienes no.
 
-P4: “¿Cuántos libros leyó en los últimos doce meses?”
-Esta es una variable cuantitativa que nos indica la intensidad del hábito lector. Además de mostrar si las personas leen, también nos dice la cantidad de libros que consumen al año.
+P4: “¿Cuántos libros leyó en los últimos doce meses?” Esta es una variable cuantitativa que nos indica la intensidad del hábito lector. Además de mostrar si las personas leen, también nos dice la cantidad de libros que consumen al año.
 
-P5: “¿Cuál fue el principal motivo por el que leyó libros?”
-Variable categórica importante, ya que es un gran indicador dentro del análisis. Con esto podemos identificar a las personas que leen por placer o a quienes lo hacen por trabajo.
+P5: “¿Cuál fue el principal motivo por el que leyó libros?” Variable categórica importante, ya que es un gran indicador dentro del análisis. Con esto podemos identificar a las personas que leen por placer o a quienes lo hacen por trabajo.
 
-P10 y P11: “¿Cuántas revistas leyó en los últimos tres meses?” y “¿Cuál fue el motivo principal por el que leyó estas revistas?”
-Estas variables pueden funcionar como complementarias y permiten observar la lectura de revistas como parte del hábito lector. Es importante porque muchas personas tienen interés en leer materiales impresos o de tendencia.
+P10 y P11: “¿Cuántas revistas leyó en los últimos tres meses?” y “¿Cuál fue el motivo principal por el que leyó estas revistas?” Estas variables pueden funcionar como complementarias y permiten observar la lectura de revistas como parte del hábito lector. Es importante porque muchas personas tienen interés en leer materiales impresos o de tendencia.
 
-P16 y P17: “¿Cuántos periódicos leyó la semana pasada?” y “¿Cuál fue el motivo principal por el que leyó el (los) periódico(s)?”
-Esta variable es complementaria, ya que nos permite analizar la lectura de prensa, lo que enriquece la visión de los hábitos de lectura. Con esto observamos que existe una gran diversidad de medios en los cuales se manifiesta la práctica lectora.
+P16 y P17: “¿Cuántos periódicos leyó la semana pasada?” y “¿Cuál fue el motivo principal por el que leyó el (los) periódico(s)?” Esta variable es complementaria, ya que nos permite analizar la lectura de prensa, lo que enriquece la visión de los hábitos de lectura. Con esto observamos que existe una gran diversidad de medios en los cuales se manifiesta la práctica lectora.
 
 # A. Exploracion de datos
 
 ## 1. Calculo de medias estadisticas
 
 ### Variables cuantitativas
+
 ```{r}
 # ----MEDIDAS DE TENDENCIA CENTRAL----
 
@@ -306,6 +294,7 @@ print(resumen_medidas_forma)
 ```
 
 ### Variables cualitativas
+
 ```{r}
 # ---- PREPARACIÓN DE VARIABLES CUALITATIVAS ----
 
@@ -345,7 +334,6 @@ print(resumen_sexo)
 
 ```
 
-
 ```{r}
 # ---- ANÁLISIS DE FRECUENCIA: ENTIDAD ----
 
@@ -363,6 +351,7 @@ resumen_entidad = data.frame(
 print("Tabla de Frecuencias: ENTIDAD (primeros 10 de 32)")
 print(resumen_entidad)
 ```
+
 ```{r}
 # ---- ANÁLISIS DE FRECUENCIA: P34_1 (Llevaban a bibliotecas) ----
 
@@ -383,6 +372,7 @@ resumen_p34_1 = data.frame(
 print("Tabla de Frecuencias: P34_1 (Llevaban a bibliotecas)")
 print(resumen_p34_1)
 ```
+
 ```{r}
 # ---- ANÁLISIS DE FRECUENCIA: P34_2 (veía a sus padres o tutores leer) ----
 
@@ -403,6 +393,7 @@ resumen_p34_2 = data.frame(
 print("Tabla de Frecuencias: P34_2 (veía a sus padres o tutores leer)")
 print(resumen_p34_2)
 ```
+
 ```{r}
 # ---- ANÁLISIS DE FRECUENCIA: P34_3 (Sus padres o tutores le leían en voz alta) ----
 
@@ -423,6 +414,7 @@ resumen_p34_3 = data.frame(
 print("Tabla de Frecuencias: P34_3 (sus padres o tutores le leían en voz alta)")
 print(resumen_p34_2)
 ```
+
 ```{r}
 # ---- ANÁLISIS DE FRECUENCIA: P34_4 (en su casa había libros distintos a los de texto escolar) ----
 
@@ -443,6 +435,7 @@ resumen_p34_4 = data.frame(
 print("Tabla de Frecuencias: P34_3 (en su casa había libros distintos a los de texto escolar)")
 print(resumen_p34_4)
 ```
+
 ```{r}
 # ---- ANÁLISIS DE FRECUENCIA: P2 (Acostumbra leer) ----
 
@@ -463,6 +456,7 @@ resumen_p2 = data.frame(
 print("Tabla de Frecuencias: P2 (Acostumbra leer)")
 print(resumen_p2)
 ```
+
 ```{r}
 # ---- ANÁLISIS DE FRECUENCIA: P5 (Motivo de lectura de libros) ----
 
@@ -483,6 +477,7 @@ resumen_p5 = data.frame(
 print("Tabla de Frecuencias: P5 (Motivo lectura libros)")
 print(resumen_p5)
 ```
+
 ```{r}
 # ---- ANÁLISIS DE FRECUENCIA: P11 (Motivo de lectura de revistas) ----
 
@@ -503,6 +498,7 @@ resumen_p11 = data.frame(
 print("Tabla de Frecuencias: P11 (Motivo lectura de revistas)")
 print(resumen_p11)
 ```
+
 ```{r}
 # ---- ANÁLISIS DE FRECUENCIA: P17 (Motivo de lectura de periódicos) ----
 
@@ -524,7 +520,6 @@ print("Tabla de Frecuencias: P17 (Motivo lectura de periódicos)")
 print(resumen_p17)
 ```
 
-
 ## Herramientas de visualizacion
 
 ### Variables cuantitativas
@@ -536,13 +531,9 @@ ggplot(data = df_c[,c("edad","TL")], aes(x=edad,y=TL)) +
         geom_jitter(size = 0.7)
 ```
 
-
 Gran cantidad de valores atipicos, mayor densidad cerca del 0, se nota una baja o nula coorrelacion debido a que es constante cerca del cero
 
-
 Grafica de barras: Textos leidos vs cantidad de gente
-
-
 
 ```{r}
 ggplot(data = df_c[,c("edad","TL")], aes(x=TL)) +
@@ -553,7 +544,6 @@ ggplot(data = df_c[,c("edad","TL")], aes(x=TL)) +
         geom_vline(xintercept =mean(df_c$TL), aes(x = TL),color = "red",linewidth=1.3)
 ```
 
-
 Densidad de cantidad de libros leidos
 
 ```{r}
@@ -561,7 +551,6 @@ ggplot(data = df_c, aes(x = TL)) +
         geom_density(alpha= 1) +
         xlim(0,50)
 ```
-
 
 Distribucion asimetrica con sesgo a la izquierda
 
@@ -580,7 +569,6 @@ Como ya se vio en las graficas anteriores, la probabilidad que haya una correlac
 cor(df_c$TL,df_c$edad)
 ```
 
-
 ### Variables categoricas
 
 Cantidad de personas que fueron a una libreria en su infancia
@@ -594,17 +582,12 @@ labels=c("Yes","No","Other")
 pie(vec,labels)
 ```
 
-
-
-
-
 Nuestro objetivo es analizar como se relacionan las tendencias de lectura con variables categoricas como la manera en la que desarrollaron su infancia y educacion.
 
 A continuacion se realizan graficos de dispersion relacionando las variables categoricas con la cantidad de textos leidos
 
-
 ```{r}
-ggplot(df_c, aes(x = df_c$p34_1, y = df_c$TL)) +
+ggplot(df_c, aes(x = p34_1, y = TL)) +
         geom_point(position = position_jitter(width = 0.1), alpha = 0.5) +
         labs(title = "lo llevaban a bibliotecas o librerias?",
               x = "1: si, 2: no, otros: nulos", y =  "Cantidad de textos leidos")
@@ -612,14 +595,11 @@ ggplot(df_c, aes(x = df_c$p34_1, y = df_c$TL)) +
 
 Porcentaje de personas que acostumbran leer
 
-
 ```{r}
 ggplot(df_c, aes(x = p2)) +
         geom_bar() +
         labs(title = "Acostumbra leer?", y = "cantidad de personas", xv="1: si, 2: no, 0: nulo")
 ```
-
-
 
 # Vinculacion de datos categoricos
 
@@ -628,23 +608,3 @@ ggplot(df_c, aes(x = p2)) +
 ## Graficos cuantitativos
 
 ## Graficos comparativos
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
