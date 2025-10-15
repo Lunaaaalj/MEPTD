@@ -7,6 +7,7 @@ output:
 ```{r setup, include=FALSE}
 
 knitr::opts_chunk$set(echo = FALSE)
+setwd("data")
 
 ```
 
@@ -15,11 +16,7 @@ Juntando todos los datos de todos los años, se obtiene infofmacion relevante so
 # Estructura:
 
 ```{r}
-# Set working directory to the correct folder (Datos, not data)
-#setwd("/Users/angelluna/Documents/STEM_PROJECTS/R_Projects_2/MEPTD/data")
 
-# Set working directory (Rafael)
-setwd("/data")
 
 # Install and load required library for combining data frames
 if (!require(dplyr, quietly = TRUE)) {
