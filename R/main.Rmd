@@ -624,8 +624,7 @@ matrix_p
 
 ```{r}
 alpha = 0.03
-test = chisq.test(matrix_p,correct = FALSE)
-H_0 = test$p_value >= alpha
+H_0 = chisq.test(matrix_p,correct = FALSE)$p.value >= alpha
 H_0
 ```
 
@@ -646,13 +645,30 @@ df_TLC = subset(df_c, p34_4 == 1)
 df_TLCc = subset(df_c, p34_4 == 2)
 
 alpha = 0.03
-H__0 = t.test(df_TLC$TL,df_TLCc$TL,alternative = "greater", var.equal = FALSE)$p.value >= alpha
-H_0
+H_0_2 = t.test(df_TLC$TL,df_TLCc$TL,alternative = "greater", var.equal = FALSE)$p.value >= alpha
+H_0_2
 ```
 
 Hay suficiente evidencia estadistica para rechazar la hipotesis nula, por lo que podemos inferir que la media de cantidad de libros que lee la poblacion que tuvo libros en su casa es mayor a la que no.
 
 ## Prueba 3
+
+Se plantea si en promedio las mujeres leen mas textos que los hombres
+
+$$
+H_0:\mu_{\mathbf{sexo}=1}=\mu_{\mathbf{sexo}=2}\quad H_1:\mu_{\mathbf{sexo}=1}<\mu_{\mathbf{sexo}=2}
+$$
+
+```{r}
+df_M = subset(df_c,sexo == 1)
+df_F = subset(df_c,sexo == 2)
+alpha = 0.03
+H_0_3 = t.test(df_M$TL,df_F$TL,alternative = "less", var.equal = FALSE )$p.value >= alpha
+H_0_3
+
+```
+
+NO hay suficiente evidencia estadistica para rechazar la hipotesis nula, por lo que nos quedamos con la inferencia de que en promedio los hombres leen mas o igual que las mujeres.
 
 ## Prueba 4
 
