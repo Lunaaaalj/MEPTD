@@ -607,7 +607,7 @@ ggplot(df_c, aes(x = p2)) +
 Hay alguna relacion entre el hecho que han visto leer a sus padres (p34-2) y tengan gusto por leer en la adultez (p5=4)\
 
 $$
-H_0:\quad p5=4\perp\!\!\!\perp p34_2\quad H_1:\quad p5=4\perp\!\!\!\perp p34_2\quad \alpha = 0.5
+H_0:\quad p5=4\perp\!\!\!\perp p34_2\quad H_1:\quad p5=4\not\perp\!\!\!\perp p34_2\quad \alpha = 0.5
 $$\
 
 ```{r}
@@ -671,6 +671,32 @@ H_0_3
 NO hay suficiente evidencia estadistica para rechazar la hipotesis nula, por lo que nos quedamos con la inferencia de que en promedio los hombres leen mas o igual que las mujeres.
 
 ## Prueba 4
+
+Se quiere comprobar si el hecho de que fueran llevados a bibliotecas y librerias en su infancia afecte la probabilidad de que lean frecuentemente
+
+$$
+H_0: p34_1\perp\!\!\!\perp p2\quad H_1:p34_1\not\perp\!\!\!\perp p2
+$$
+
+```{r}
+matrix_p4 = matrix(c(
+    sum(df_c$p34_1 == 1 & df_c$p2 == 1),
+    sum(df_c$p34_1 == 2 & df_c$p2 == 1),
+    sum(df_c$p34_1 == 1 & df_c$p2 == 2),
+    sum(df_c$p34_1 == 2 & df_c$p2 == 2)
+),ncol = 2, byrow = TRUE)
+colnames(matrix_p4) = c("FLB","FLBc")
+rownames(matrix_p4) = c("LF","LFc")
+matrix_p4
+```
+
+```{r}
+alpha = 0.02
+H_0_4 = chisq.test(matrix_p4, correct = FALSE)$p.value >= alpha
+H_0_4
+```
+
+En conclusion hay suficiente evidencia estadistica para rechazar la hipotesis nula, permitiendonos inferir que hay una relacion entre si los llevaron a bibliotecas y librerias y si leen frecuentemente.
 
 # Intervalos de Confianza
 
