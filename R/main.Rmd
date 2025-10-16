@@ -635,6 +635,23 @@ NOTAR: El hecho de que haya mas personas del lado VPLc, no significa que al no v
 
 ## Prueba 2
 
+Se plantea si las medias de la cantidad de libros que leen las personas que tuvieron libros en casa y las personas que no tuvieron libros en casa son diferentes
+
+$$
+H_0:\mu_{TL_{p34_4=1}}=\mu_{TL_{p34_4=2}}\quad H_1:\mu_{TL_{p34_4=1}}>\mu_{TL_{p34_4=2}}
+$$
+
+```{r}
+df_TLC = subset(df_c, p34_4 == 1)
+df_TLCc = subset(df_c, p34_4 == 2)
+
+alpha = 0.03
+H__0 = t.test(df_TLC$TL,df_TLCc$TL,alternative = "greater", var.equal = FALSE)$p.value >= alpha
+H_0
+```
+
+Hay suficiente evidencia estadistica para rechazar la hipotesis nula, por lo que podemos inferir que la media de cantidad de libros que lee la poblacion que tuvo libros en su casa es mayor a la que no.
+
 ## Prueba 3
 
 ## Prueba 4
