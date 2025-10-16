@@ -598,10 +598,16 @@ ggplot(df_c, aes(x = p2)) +
         labs(title = "Acostumbra leer?", y = "cantidad de personas", xv="1: si, 2: no, 0: nulo")
 ```
 
-# Vinculacion de datos categoricos
+# Pruebas de hipotesis
 
-## Medidas de variables cuantitativas
+## Prueba 1
 
-## Graficos cuantitativos
+## Prueba 2
 
-## Graficos comparativos
+## Prueba 3
+
+## Prueba 4
+
+# Intervalos de Confianza
+
+# Análisis de otras técnicas
