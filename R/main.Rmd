@@ -602,6 +602,37 @@ ggplot(df_c, aes(x = p2)) +
 
 ## Prueba 1
 
+\\newcommand{\\indep}{\\perp\\!\\!\\!\\perp}
+
+Hay alguna relacion entre el hecho que han visto leer a sus padres (p34-2) y tengan gusto por leer en la adultez (p5=4)\
+
+$$
+H_0:\quad p5=4\perp\!\!\!\perp p34_2\quad H_1:\quad p5=4\perp\!\!\!\perp p34_2\quad \alpha = 0.5
+$$\
+
+```{r}
+matrix_p <- matrix(c(
+  sum(df_c$p5 == 4 & df_c$p34_2 == 1),   # LPG_VPL
+  sum(df_c$p5 == 4 & df_c$p34_2 != 1),   # LPG_VPLc
+  sum(df_c$p5 != 4 & df_c$p34_2 == 1),   # LPGc_VPL
+  sum(df_c$p5 != 4 & df_c$p34_2 != 1)    # LPGc_VPLc
+), ncol = 2, byrow = TRUE)
+colnames(matrix_p) = c("LPG","LPGc")
+rownames(matrix_p) = c("VPL","VPLc")
+matrix_p
+```
+
+```{r}
+alpha = 0.03
+test = chisq.test(matrix_p,correct = FALSE)
+H_0 = test$p_value >= alpha
+H_0
+```
+
+Conclusion: se puede rechazar la hipotesis nula, infiriendo que hay una dependencia entre el hecho de que vieran o no a sus padres leer y que lean por gusto.
+
+NOTAR: El hecho de que haya mas personas del lado VPLc, no significa que al no ver sus padres leer tienen mas probabilidad de que les guste leer, si no que las proporciones difieren en gran medida.
+
 ## Prueba 2
 
 ## Prueba 3
