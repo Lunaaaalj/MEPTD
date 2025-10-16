@@ -598,13 +598,109 @@ ggplot(df_c, aes(x = p2)) +
         labs(title = "Acostumbra leer?", y = "cantidad de personas", xv="1: si, 2: no, 0: nulo")
 ```
 
-# Vinculacion de datos categoricos
+# Pruebas de hipotesis
 
-## Medidas de variables cuantitativas
+## Prueba 1
 
-## Graficos cuantitativos
+\\newcommand{\\indep}{\\perp\\!\\!\\!\\perp}
 
-## Graficos comparativos
+Hay alguna relacion entre el hecho que han visto leer a sus padres (p34-2) y tengan gusto por leer en la adultez (p5=4)\
+
+$$
+H_0:\quad p5=4\perp\!\!\!\perp p34_2\quad H_1:\quad p5=4\not\perp\!\!\!\perp p34_2\quad \alpha = 0.5
+$$\
+
+```{r}
+matrix_p <- matrix(c(
+  sum(df_c$p5 == 4 & df_c$p34_2 == 1),   # LPG_VPL
+  sum(df_c$p5 == 4 & df_c$p34_2 != 1),   # LPG_VPLc
+  sum(df_c$p5 != 4 & df_c$p34_2 == 1),   # LPGc_VPL
+  sum(df_c$p5 != 4 & df_c$p34_2 != 1)    # LPGc_VPLc
+), ncol = 2, byrow = TRUE)
+colnames(matrix_p) = c("LPG","LPGc")
+rownames(matrix_p) = c("VPL","VPLc")
+matrix_p
+```
+
+```{r}
+alpha = 0.03
+H_0 = chisq.test(matrix_p,correct = FALSE)$p.value >= alpha
+H_0
+```
+
+Conclusion: se puede rechazar la hipotesis nula, infiriendo que hay una dependencia entre el hecho de que vieran o no a sus padres leer y que lean por gusto.
+
+NOTAR: El hecho de que haya mas personas del lado VPLc, no significa que al no ver sus padres leer tienen mas probabilidad de que les guste leer, si no que las proporciones difieren en gran medida.
+
+## Prueba 2
+
+Se plantea si las medias de la cantidad de libros que leen las personas que tuvieron libros en casa y las personas que no tuvieron libros en casa son diferentes
+
+$$
+H_0:\mu_{TL_{p34_4=1}}=\mu_{TL_{p34_4=2}}\quad H_1:\mu_{TL_{p34_4=1}}>\mu_{TL_{p34_4=2}}
+$$
+
+```{r}
+df_TLC = subset(df_c, p34_4 == 1)
+df_TLCc = subset(df_c, p34_4 == 2)
+
+alpha = 0.03
+H_0_2 = t.test(df_TLC$TL,df_TLCc$TL,alternative = "greater", var.equal = FALSE)$p.value >= alpha
+H_0_2
+```
+
+Hay suficiente evidencia estadistica para rechazar la hipotesis nula, por lo que podemos inferir que la media de cantidad de libros que lee la poblacion que tuvo libros en su casa es mayor a la que no.
+
+## Prueba 3
+
+Se plantea si en promedio las mujeres leen mas textos que los hombres
+
+$$
+H_0:\mu_{\mathbf{sexo}=1}=\mu_{\mathbf{sexo}=2}\quad H_1:\mu_{\mathbf{sexo}=1}<\mu_{\mathbf{sexo}=2}
+$$
+
+```{r}
+df_M = subset(df_c,sexo == 1)
+df_F = subset(df_c,sexo == 2)
+alpha = 0.03
+H_0_3 = t.test(df_M$TL,df_F$TL,alternative = "less", var.equal = FALSE )$p.value >= alpha
+H_0_3
+
+```
+
+NO hay suficiente evidencia estadistica para rechazar la hipotesis nula, por lo que nos quedamos con la inferencia de que en promedio los hombres leen mas o igual que las mujeres.
+
+## Prueba 4
+
+Se quiere comprobar si el hecho de que fueran llevados a bibliotecas y librerias en su infancia afecte la probabilidad de que lean frecuentemente
+
+$$
+H_0: p34_1\perp\!\!\!\perp p2\quad H_1:p34_1\not\perp\!\!\!\perp p2
+$$
+
+```{r}
+matrix_p4 = matrix(c(
+    sum(df_c$p34_1 == 1 & df_c$p2 == 1),
+    sum(df_c$p34_1 == 2 & df_c$p2 == 1),
+    sum(df_c$p34_1 == 1 & df_c$p2 == 2),
+    sum(df_c$p34_1 == 2 & df_c$p2 == 2)
+),ncol = 2, byrow = TRUE)
+colnames(matrix_p4) = c("FLB","FLBc")
+rownames(matrix_p4) = c("LF","LFc")
+matrix_p4
+```
+
+```{r}
+alpha = 0.02
+H_0_4 = chisq.test(matrix_p4, correct = FALSE)$p.value >= alpha
+H_0_4
+```
+
+En conclusion hay suficiente evidencia estadistica para rechazar la hipotesis nula, permitiendonos inferir que hay una relacion entre si los llevaron a bibliotecas y librerias y si leen frecuentemente.
+
+# Intervalos de Confianza
+
+# Análisis de otras técnicas
 
 ## Intervalos de confianza
 ```{r}
