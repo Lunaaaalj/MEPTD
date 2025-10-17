@@ -7,7 +7,7 @@ output:
 ```{r setup, include=FALSE}
 
 knitr::opts_chunk$set(echo = FALSE)
-setwd("data")
+#setwd("data")
 
 ```
 
@@ -36,12 +36,12 @@ if(!require(moments, quietly = TRUE)) {
 }
 
 # Read CSV files individually first
-df_2019 <- read.csv("conjunto_de_datos_molec_2019_02.csv")
-df_2020 <- read.csv("conjunto_de_datos_molec_2020_02.csv")
-df_2021 <- read.csv("conjunto_de_datos_molec_2021_02.CSV")
-df_2022 <- read.csv("conjunto_de_datos_molec_2022_02.CSV")
-df_2023 <- read.csv("conjunto_de_datos_molec_2023_02.CSV")
-df_2024 <- read.csv("conjunto_de_datos_molec_2024_02.csv")
+df_2019 <- read.csv("../data/conjunto_de_datos_molec_2019_02.csv")
+df_2020 <- read.csv("../data/conjunto_de_datos_molec_2020_02.csv")
+df_2021 <- read.csv("../data/conjunto_de_datos_molec_2021_02.CSV")
+df_2022 <- read.csv("../data/conjunto_de_datos_molec_2022_02.CSV")
+df_2023 <- read.csv("../data/conjunto_de_datos_molec_2023_02.CSV")
+df_2024 <- read.csv("../data/conjunto_de_datos_molec_2024_02.csv")
 
 # Combine data frames properly using rbind() or bind_rows()
 df <- bind_rows(df_2019, df_2020, df_2021, df_2022, df_2023, df_2024)
@@ -602,8 +602,6 @@ ggplot(df_c, aes(x = p2)) +
 
 ## Prueba 1
 
-\\newcommand{\\indep}{\\perp\\!\\!\\!\\perp}
-
 Hay alguna relacion entre el hecho que han visto leer a sus padres (p34-2) y tengan gusto por leer en la adultez (p5=4)\
 
 $$
@@ -703,8 +701,9 @@ En conclusion hay suficiente evidencia estadistica para rechazar la hipotesis nu
 # Análisis de otras técnicas
 
 ## Intervalos de confianza
+
 ```{r}
-# ---- INTERVALOS DE CONFIANZA (α = 0.04 → 96%) ----
+# ---- INTERVALOS DE CONFIANZA ( = 0.04 → 96%) ----
 
 # Ponemos el nivel de significancia y calculamos el z crítico
 nivel_significancia = 0.04
@@ -724,7 +723,7 @@ ic_prop_p5_sup = prop_p5_gusto + z_critico * se_prop_p5
 
 cat("1) Proporción P5 = 'Gusto/Entretenimiento'\n")
 cat("n =", n_p5, "k =", k_p5_gusto, "\n")
-cat("p̂ =", round(prop_p5_gusto,4),
+cat("p =", round(prop_p5_gusto,4),
     "IC 96% = [", round(ic_prop_p5_inf,4), ",", round(ic_prop_p5_sup,4), "]\n\n")
 
 # ---- 2) Diferencia de proporciones (Libros en casa Sí vs No) ----
@@ -787,7 +786,7 @@ ic_var_sup = ((n_p4 - 1) * s2_p4) / chi_sup
 
 cat("4) Varianza p4 (número de libros leídos)\n")
 cat("n =", n_p4, "s^2 =", round(s2_p4,4), "\n")
-cat("IC 96% para σ^2 = [", round(ic_var_inf,4), ",", round(ic_var_sup,4), "]\n\n")
+cat("IC 96% para ^2 = [", round(ic_var_inf,4), ",", round(ic_var_sup,4), "]\n\n")
 
 # ---- Resumen de los intervalos ----
 resumen_ICs = data.frame(
@@ -810,4 +809,3 @@ print(resumen_ICs)
 # En general, calculamos los intervalos de confianza con los métodos clásicos: proporciones con z, medias con t y varianzas con chi-cuadrado. Escogimos un nivel de significancia de 0.04 (IC del 96%) para tener un poco más de confianza. Con estos resultados, vemos en qué rango probable se encuentran las proporciones, medias y varianzas reales de la población. Así, podemos interpretar qué tan precisas son las estimaciones a partir de los datos de la muestra.
 
 ```
-
