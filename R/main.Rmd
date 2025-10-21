@@ -696,9 +696,6 @@ H_0_4
 
 En conclusion hay suficiente evidencia estadistica para rechazar la hipotesis nula, permitiendonos inferir que hay una relacion entre si los llevaron a bibliotecas y librerias y si leen frecuentemente.
 
-# Intervalos de Confianza
-
-# Análisis de otras técnicas
 
 ## Intervalos de confianza
 
