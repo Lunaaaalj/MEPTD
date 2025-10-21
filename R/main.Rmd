@@ -7,6 +7,7 @@ output:
 ```{r setup, include=FALSE}
 
 knitr::opts_chunk$set(echo = FALSE)
+#setwd("data")
 
 ```
 
@@ -15,11 +16,7 @@ Juntando todos los datos de todos los años, se obtiene infofmacion relevante so
 # Estructura:
 
 ```{r}
-# Set working directory to the correct folder (Datos, not data)
-#setwd("/Users/angelluna/Documents/STEM_PROJECTS/R_Projects_2/MEPTD/data")
 
-# Set working directory (Rafael)
-setwd("/data")
 
 # Install and load required library for combining data frames
 if (!require(dplyr, quietly = TRUE)) {
@@ -39,12 +36,12 @@ if(!require(moments, quietly = TRUE)) {
 }
 
 # Read CSV files individually first
-df_2019 <- read.csv("conjunto_de_datos_molec_2019_02.csv")
-df_2020 <- read.csv("conjunto_de_datos_molec_2020_02.csv")
-df_2021 <- read.csv("conjunto_de_datos_molec_2021_02.CSV")
-df_2022 <- read.csv("conjunto_de_datos_molec_2022_02.CSV")
-df_2023 <- read.csv("conjunto_de_datos_molec_2023_02.CSV")
-df_2024 <- read.csv("conjunto_de_datos_molec_2024_02.csv")
+df_2019 <- read.csv("../data/conjunto_de_datos_molec_2019_02.csv")
+df_2020 <- read.csv("../data/conjunto_de_datos_molec_2020_02.csv")
+df_2021 <- read.csv("../data/conjunto_de_datos_molec_2021_02.CSV")
+df_2022 <- read.csv("../data/conjunto_de_datos_molec_2022_02.CSV")
+df_2023 <- read.csv("../data/conjunto_de_datos_molec_2023_02.CSV")
+df_2024 <- read.csv("../data/conjunto_de_datos_molec_2024_02.csv")
 
 # Combine data frames properly using rbind() or bind_rows()
 df <- bind_rows(df_2019, df_2020, df_2021, df_2022, df_2023, df_2024)
@@ -601,10 +598,214 @@ ggplot(df_c, aes(x = p2)) +
         labs(title = "Acostumbra leer?", y = "cantidad de personas", xv="1: si, 2: no, 0: nulo")
 ```
 
-# Vinculacion de datos categoricos
+# Pruebas de hipotesis
 
-## Medidas de variables cuantitativas
+## Prueba 1
 
-## Graficos cuantitativos
+Hay alguna relacion entre el hecho que han visto leer a sus padres (p34-2) y tengan gusto por leer en la adultez (p5=4)\
 
-## Graficos comparativos
+$$
+H_0:\quad p5=4\perp\!\!\!\perp p34_2\quad H_1:\quad p5=4\not\perp\!\!\!\perp p34_2\quad \alpha = 0.5
+$$\
+
+```{r}
+matrix_p <- matrix(c(
+  sum(df_c$p5 == 4 & df_c$p34_2 == 1),   # LPG_VPL
+  sum(df_c$p5 == 4 & df_c$p34_2 != 1),   # LPG_VPLc
+  sum(df_c$p5 != 4 & df_c$p34_2 == 1),   # LPGc_VPL
+  sum(df_c$p5 != 4 & df_c$p34_2 != 1)    # LPGc_VPLc
+), ncol = 2, byrow = TRUE)
+colnames(matrix_p) = c("LPG","LPGc")
+rownames(matrix_p) = c("VPL","VPLc")
+matrix_p
+```
+
+```{r}
+alpha = 0.03
+H_0 = chisq.test(matrix_p,correct = FALSE)$p.value >= alpha
+H_0
+```
+
+Conclusion: se puede rechazar la hipotesis nula, infiriendo que hay una dependencia entre el hecho de que vieran o no a sus padres leer y que lean por gusto.
+
+NOTAR: El hecho de que haya mas personas del lado VPLc, no significa que al no ver sus padres leer tienen mas probabilidad de que les guste leer, si no que las proporciones difieren en gran medida.
+
+## Prueba 2
+
+Se plantea si las medias de la cantidad de libros que leen las personas que tuvieron libros en casa y las personas que no tuvieron libros en casa son diferentes
+
+$$
+H_0:\mu_{TL_{p34_4=1}}=\mu_{TL_{p34_4=2}}\quad H_1:\mu_{TL_{p34_4=1}}>\mu_{TL_{p34_4=2}}
+$$
+
+```{r}
+df_TLC = subset(df_c, p34_4 == 1)
+df_TLCc = subset(df_c, p34_4 == 2)
+
+alpha = 0.03
+H_0_2 = t.test(df_TLC$TL,df_TLCc$TL,alternative = "greater", var.equal = FALSE)$p.value >= alpha
+H_0_2
+```
+
+Hay suficiente evidencia estadistica para rechazar la hipotesis nula, por lo que podemos inferir que la media de cantidad de libros que lee la poblacion que tuvo libros en su casa es mayor a la que no.
+
+## Prueba 3
+
+Se plantea si en promedio las mujeres leen mas textos que los hombres
+
+$$
+H_0:\mu_{\mathbf{sexo}=1}=\mu_{\mathbf{sexo}=2}\quad H_1:\mu_{\mathbf{sexo}=1}<\mu_{\mathbf{sexo}=2}
+$$
+
+```{r}
+df_M = subset(df_c,sexo == 1)
+df_F = subset(df_c,sexo == 2)
+alpha = 0.03
+H_0_3 = t.test(df_M$TL,df_F$TL,alternative = "less", var.equal = FALSE )$p.value >= alpha
+H_0_3
+
+```
+
+NO hay suficiente evidencia estadistica para rechazar la hipotesis nula, por lo que nos quedamos con la inferencia de que en promedio los hombres leen mas o igual que las mujeres.
+
+## Prueba 4
+
+Se quiere comprobar si el hecho de que fueran llevados a bibliotecas y librerias en su infancia afecte la probabilidad de que lean frecuentemente
+
+$$
+H_0: p34_1\perp\!\!\!\perp p2\quad H_1:p34_1\not\perp\!\!\!\perp p2
+$$
+
+```{r}
+matrix_p4 = matrix(c(
+    sum(df_c$p34_1 == 1 & df_c$p2 == 1),
+    sum(df_c$p34_1 == 2 & df_c$p2 == 1),
+    sum(df_c$p34_1 == 1 & df_c$p2 == 2),
+    sum(df_c$p34_1 == 2 & df_c$p2 == 2)
+),ncol = 2, byrow = TRUE)
+colnames(matrix_p4) = c("FLB","FLBc")
+rownames(matrix_p4) = c("LF","LFc")
+matrix_p4
+```
+
+```{r}
+alpha = 0.02
+H_0_4 = chisq.test(matrix_p4, correct = FALSE)$p.value >= alpha
+H_0_4
+```
+
+En conclusion hay suficiente evidencia estadistica para rechazar la hipotesis nula, permitiendonos inferir que hay una relacion entre si los llevaron a bibliotecas y librerias y si leen frecuentemente.
+
+# Intervalos de Confianza
+
+# Análisis de otras técnicas
+
+## Intervalos de confianza
+
+```{r}
+# ---- INTERVALOS DE CONFIANZA ( = 0.04 → 96%) ----
+
+# Ponemos el nivel de significancia y calculamos el z crítico
+nivel_significancia = 0.04
+confianza = 1 - nivel_significancia
+z_critico = qnorm(1 - nivel_significancia/2)
+
+# ---- 1) Proporción que lee por gusto (P5) ----
+# Checamos cuántos respondieron P5 y cuántos leen por gusto
+n_p5 = sum(!is.na(p5_factor))
+k_p5_gusto = sum(p5_factor == "Gusto/Entretenimiento", na.rm = TRUE)
+prop_p5_gusto = k_p5_gusto / n_p5
+
+# Sacamos el error estándar y el intervalo al 96%
+se_prop_p5 = sqrt(prop_p5_gusto * (1 - prop_p5_gusto) / n_p5)
+ic_prop_p5_inf = prop_p5_gusto - z_critico * se_prop_p5
+ic_prop_p5_sup = prop_p5_gusto + z_critico * se_prop_p5
+
+cat("1) Proporción P5 = 'Gusto/Entretenimiento'\n")
+cat("n =", n_p5, "k =", k_p5_gusto, "\n")
+cat("p =", round(prop_p5_gusto,4),
+    "IC 96% = [", round(ic_prop_p5_inf,4), ",", round(ic_prop_p5_sup,4), "]\n\n")
+
+# ---- 2) Diferencia de proporciones (Libros en casa Sí vs No) ----
+# Separamos los que tienen libros en casa (Sí/No)
+n_libro_si = sum(!is.na(p5_factor) & p34_4_factor == "Sí")
+n_libro_no = sum(!is.na(p5_factor) & p34_4_factor == "No")
+
+# Contamos cuántos leen por gusto en cada grupo
+k_libro_si = sum(p5_factor == "Gusto/Entretenimiento" & p34_4_factor == "Sí", na.rm = TRUE)
+k_libro_no = sum(p5_factor == "Gusto/Entretenimiento" & p34_4_factor == "No", na.rm = TRUE)
+
+# Sacamos proporciones en cada grupo
+p_si = ifelse(n_libro_si > 0, k_libro_si / n_libro_si, NA)
+p_no = ifelse(n_libro_no > 0, k_libro_no / n_libro_no, NA)
+
+# Calculamos la diferencia y su error estándar
+diff_prop = p_si - p_no
+se_diff_prop = sqrt((p_si*(1-p_si)/n_libro_si) + (p_no*(1-p_no)/n_libro_no))
+
+# Armamos el intervalo al 96%
+ic_diff_inf = diff_prop - z_critico * se_diff_prop
+ic_diff_sup = diff_prop + z_critico * se_diff_prop
+
+cat("2) Diferencia de proporciones (Libros en casa: Sí vs No)\n")
+cat("n(Sí) =", n_libro_si, "k(Sí) =", k_libro_si, " p1 =", round(p_si,4), "\n")
+cat("n(No) =", n_libro_no, "k(No) =", k_libro_no, " p2 =", round(p_no,4), "\n")
+cat("p1 - p2 =", round(diff_prop,4),
+    "IC 96% = [", round(ic_diff_inf,4), ",", round(ic_diff_sup,4), "]\n\n")
+
+# ---- 3) Media del total leído (TL) ----
+# Limpiamos los NA y sacamos media, desviación y error estándar
+tl = df_c$TL
+tl = tl[!is.na(tl)]
+n_tl = length(tl)
+media_tl = mean(tl)
+sd_tl = sd(tl)
+se_media_tl = sd_tl / sqrt(n_tl)
+
+# Sacamos el t crítico y el intervalo al 96%
+t_critico = qt(1 - nivel_significancia/2, df = n_tl - 1)
+ic_media_tl_inf = media_tl - t_critico * se_media_tl
+ic_media_tl_sup = media_tl + t_critico * se_media_tl
+
+cat("3) Media TL (total leído)\n")
+cat("n =", n_tl, "media =", round(media_tl,4), "sd =", round(sd_tl,4), "\n")
+cat("IC 96% (t) = [", round(ic_media_tl_inf,4), ",", round(ic_media_tl_sup,4), "]\n\n")
+
+# ---- 4) Varianza del número de libros leídos (p4) ----
+# Quitamos NA y sacamos varianza muestral
+p4 = df_c$p4
+p4 = p4[!is.na(p4)]
+n_p4 = length(p4)
+s2_p4 = var(p4)
+
+# Calculamos los valores críticos chi-cuadrado y armamos el IC
+chi_inf = qchisq(1 - nivel_significancia/2, df = n_p4 - 1)
+chi_sup = qchisq(nivel_significancia/2, df = n_p4 - 1)
+ic_var_inf = ((n_p4 - 1) * s2_p4) / chi_inf
+ic_var_sup = ((n_p4 - 1) * s2_p4) / chi_sup
+
+cat("4) Varianza p4 (número de libros leídos)\n")
+cat("n =", n_p4, "s^2 =", round(s2_p4,4), "\n")
+cat("IC 96% para ^2 = [", round(ic_var_inf,4), ",", round(ic_var_sup,4), "]\n\n")
+
+# ---- Resumen de los intervalos ----
+resumen_ICs = data.frame(
+  Indicador = c(
+    "Proporción que lee por gusto (P5)",
+    "Diferencia proporciones (Libros en casa Sí - No)",
+    "Media del total leído (TL)",
+    "Varianza del número de libros leídos (P4)"
+  ),
+  Estimador = round(c(prop_p5_gusto, diff_prop, media_tl, s2_p4), 4),
+  IC_Inferior = round(c(ic_prop_p5_inf, ic_diff_inf, ic_media_tl_inf, ic_var_inf), 4),
+  IC_Superior = round(c(ic_prop_p5_sup, ic_diff_sup, ic_media_tl_sup, ic_var_sup), 4)
+)
+
+print("Resumen de intervalos de confianza (IC 96%)")
+print(resumen_ICs)
+
+# ---- Conclusión ----
+
+# En general, calculamos los intervalos de confianza con los métodos clásicos: proporciones con z, medias con t y varianzas con chi-cuadrado. Escogimos un nivel de significancia de 0.04 (IC del 96%) para tener un poco más de confianza. Con estos resultados, vemos en qué rango probable se encuentran las proporciones, medias y varianzas reales de la población. Así, podemos interpretar qué tan precisas son las estimaciones a partir de los datos de la muestra.
+
+```
