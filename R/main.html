@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>main</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="main_files/libs/clipboard/clipboard.min.js"></script>
+<script src="main_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="main_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="main_files/libs/quarto-html/popper.min.js"></script>
+<script src="main_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="main_files/libs/quarto-html/anchor.min.js"></script>
+<link href="main_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="main_files/libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="main_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="main_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="main_files/libs/bootstrap/bootstrap-81267100e462c21b3d6c0d5bf76a3417.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+
+<p>Juntando todos los datos de todos los años, se obtiene infofmacion relevante sobre la base de datos</p>
+<section id="estructura" class="level1">
+<h1>Estructura:</h1>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'dplyr'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    filter, lag</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   11966 obs. of  15 variables:
+ $ entidad: int  1 1 1 1 1 1 1 1 1 1 ...
+ $ edad   : int  52 75 67 65 66 39 47 42 67 45 ...
+ $ sexo   : int  2 1 1 2 1 1 2 1 1 1 ...
+ $ nivel  : int  3 3 2 2 6 3 3 2 2 2 ...
+ $ p34_1  : int  2 2 2 2 3 1 1 3 3 3 ...
+ $ p34_2  : int  2 1 1 1 3 1 1 3 3 1 ...
+ $ p34_3  : int  2 2 2 1 3 1 1 3 3 1 ...
+ $ p34_4  : int  2 1 1 1 1 1 1 1 3 1 ...
+ $ p2     : int  2 2 2 2 2 1 1 1 2 1 ...
+ $ p4     : int  0 0 0 0 0 0 1 0 0 0 ...
+ $ p5     : int  0 0 0 0 0 0 4 0 0 0 ...
+ $ p10    : int  0 0 0 0 0 2 0 0 0 0 ...
+ $ p11    : int  0 0 0 0 0 4 0 0 0 0 ...
+ $ p16    : int  0 0 1 0 0 1 0 3 0 2 ...
+ $ p17    : int  0 0 4 0 0 4 0 3 0 3 ...</code></pre>
+</div>
+</div>
+</section>
+<section id="dimensión-del-data-frame" class="level1">
+<h1>Dimensión del data frame</h1>
+<p>Para encontrar la cantidad de columnas y renglones del data frame se usan las funciones de ncol y nrow</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 15</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 11966</code></pre>
+</div>
+</div>
+</section>
+<section id="datos-faltantes" class="level1">
+<h1>Datos faltantes</h1>
+<p>Variables selectionadas:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>  entidad edad sexo nivel p34_1 p34_2 p34_3 p34_4 p2 p4 p5 p10 p11 p16 p17
+1       1   52    2     3     2     2     2     2  2  0  0   0   0   0   0
+2       1   75    1     3     2     1     2     1  2  0  0   0   0   0   0
+3       1   67    1     2     2     1     2     1  2  0  0   0   0   1   4
+4       1   65    2     2     2     1     1     1  2  0  0   0   0   0   0
+5       1   66    1     6     3     3     3     1  2  0  0   0   0   0   0
+6       1   39    1     3     1     1     1     1  1  0  0   2   4   1   4</code></pre>
+</div>
+</div>
+<p>Analizando el sumario, no se notan discrepancias en los valores</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>    entidad           edad            sexo           nivel       
+ Min.   : 1.00   Min.   :18.00   Min.   :1.000   Min.   : 0.000  
+ 1st Qu.: 9.00   1st Qu.:32.00   1st Qu.:1.000   1st Qu.: 3.000  
+ Median :15.00   Median :44.00   Median :2.000   Median : 4.000  
+ Mean   :15.63   Mean   :45.66   Mean   :1.563   Mean   : 4.581  
+ 3rd Qu.:20.00   3rd Qu.:58.00   3rd Qu.:2.000   3rd Qu.: 7.000  
+ Max.   :32.00   Max.   :97.00   Max.   :2.000   Max.   :99.000  
+     p34_1           p34_2           p34_3           p34_4             p2      
+ Min.   :0.000   Min.   :0.000   Min.   :0.000   Min.   :0.000   Min.   :0.00  
+ 1st Qu.:1.000   1st Qu.:1.000   1st Qu.:1.000   1st Qu.:1.000   1st Qu.:1.00  
+ Median :2.000   Median :1.000   Median :2.000   Median :1.000   Median :1.00  
+ Mean   :1.684   Mean   :1.475   Mean   :1.636   Mean   :1.417   Mean   :1.38  
+ 3rd Qu.:2.000   3rd Qu.:2.000   3rd Qu.:2.000   3rd Qu.:2.000   3rd Qu.:2.00  
+ Max.   :3.000   Max.   :3.000   Max.   :3.000   Max.   :3.000   Max.   :2.00  
+       p4               p5             p10               p11        
+ Min.   : 0.000   Min.   :0.000   Min.   : 0.0000   Min.   :0.0000  
+ 1st Qu.: 0.000   1st Qu.:0.000   1st Qu.: 0.0000   1st Qu.:0.0000  
+ Median : 0.000   Median :0.000   Median : 0.0000   Median :0.0000  
+ Mean   : 1.435   Mean   :1.367   Mean   : 0.9434   Mean   :0.9041  
+ 3rd Qu.: 2.000   3rd Qu.:3.000   3rd Qu.: 1.0000   3rd Qu.:1.0000  
+ Max.   :99.000   Max.   :6.000   Max.   :99.0000   Max.   :6.0000  
+      p16               p17        
+ Min.   : 0.0000   Min.   :0.0000  
+ 1st Qu.: 0.0000   1st Qu.:0.0000  
+ Median : 0.0000   Median :0.0000  
+ Mean   : 0.8276   Mean   :0.8097  
+ 3rd Qu.: 0.0000   3rd Qu.:0.0000  
+ Max.   :80.0000   Max.   :6.0000  </code></pre>
+</div>
+</div>
+<p>No hay valores vacios</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>entidad    edad    sexo   nivel   p34_1   p34_2   p34_3   p34_4      p2      p4 
+      0       0       0       0       0       0       0       0       0       0 
+     p5     p10     p11     p16     p17 
+      0       0       0       0       0 </code></pre>
+</div>
+</div>
+<p>Chequeo de rango de los datos cuantitativos</p>
+<p>Edad:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] entidad edad    sexo    nivel   p34_1   p34_2   p34_3   p34_4   p2     
+[10] p4      p5      p10     p11     p16     p17    
+&lt;0 rows&gt; (or 0-length row.names)</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] entidad edad    sexo    nivel   p34_1   p34_2   p34_3   p34_4   p2     
+[10] p4      p5      p10     p11     p16     p17    
+&lt;0 rows&gt; (or 0-length row.names)</code></pre>
+</div>
+</div>
+<p>Cantidad de libros leidos:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] entidad edad    sexo    nivel   p34_1   p34_2   p34_3   p34_4   p2     
+[10] p4      p5      p10     p11     p16     p17    
+&lt;0 rows&gt; (or 0-length row.names)</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     entidad edad sexo nivel p34_1 p34_2 p34_3 p34_4 p2 p4 p5 p10 p11 p16 p17
+6634      12   23    1     7     2     2     1     1  1 99  3   0   0   0   0
+9105      16   42    2     9     2     1     1     1  1 80  1   2   4   0   0</code></pre>
+</div>
+</div>
+<p>Revistas:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] entidad edad    sexo    nivel   p34_1   p34_2   p34_3   p34_4   p2     
+[10] p4      p5      p10     p11     p16     p17    
+&lt;0 rows&gt; (or 0-length row.names)</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     entidad edad sexo nivel p34_1 p34_2 p34_3 p34_4 p2 p4 p5 p10 p11 p16 p17
+97         3   41    2     9     1     1     2     1  1  5  2  50   2   3   3
+225        6   49    1     7     1     1     1     1  1  7  3  75   2   4   3
+298        8   42    2     9     1     1     2     1  1  3  1  90   1   1   4
+857       14   31    2     4     1     1     2     1  1  1  4  30   3   0   0
+894       14   22    1     7     2     1     1     1  1  4  2  60   3   5   3
+1032      15   52    1     7     1     2     2     1  1  8  4  30   3   0   0
+1101      16   43    1     4     2     1     1     1  2  0  0  99   4   2   4
+1256      19   70    1     6     2     2     2     2  1  3  3  30   4   1   3
+2171       5   31    1     7     2     1     1     1  1 12  1  90   1   7   4
+4127       4   48    1     3     2     1     2     1  1  0  0  30   3   0   0
+4341       9   30    1     7     1     1     2     1  1  4  1  60   1   3   3
+4588      11   22    1     7     1     1     1     1  1  0  0  30   1   0   0
+5047      15   53    2     3     1     1     1     1  1 10  4  30   4   5   3
+6175       6   68    2     4     1     1     1     1  1  1  4  60   4   0   0
+6179       6   34    1     6     1     1     1     1  1  3  1  60   1   0   0
+6223       7   24    1     7     2     1     1     1  1  8  2  37   2   0   0
+6659      13   57    2     3     3     3     3     3  1  2  5  40   5   0   0
+6742      14   72    1     7     2     1     2     1  1  4  3  50   2   0   0
+7234      19   50    2     6     2     2     2     2  1 12  1  30   1   0   0
+8357       9   34    2     7     1     1     2     1  1  1  1  60   1   0   0
+8767      14   42    1     7     2     1     2     1  1 30  4  70   4   0   0</code></pre>
+</div>
+</div>
+<p>Periodicos:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] entidad edad    sexo    nivel   p34_1   p34_2   p34_3   p34_4   p2     
+[10] p4      p5      p10     p11     p16     p17    
+&lt;0 rows&gt; (or 0-length row.names)</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     entidad edad sexo nivel p34_1 p34_2 p34_3 p34_4 p2 p4 p5 p10 p11 p16 p17
+3731      26   72    1     7     2     1     1     1  1  5  3  15   3  80   3</code></pre>
+</div>
+</div>
+<p>Conclusion: no hay discrepancias en la base de datos que podrian afectar el analisis</p>
+<p>Prepararemos los datos para tener un mejor analisis, esto requiere que se combinen las columnas de la cantidad de libros, revistas y periodicos leidos en una sola columna mas general:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>  entidad edad sexo nivel p34_1 p34_2 p34_3 p34_4 p2 p4 p5 p10 p11 p16 p17 TL
+1       1   52    2     3     2     2     2     2  2  0  0   0   0   0   0  0
+2       1   75    1     3     2     1     2     1  2  0  0   0   0   0   0  0
+3       1   67    1     2     2     1     2     1  2  0  0   0   0   1   4  1
+4       1   65    2     2     2     1     1     1  2  0  0   0   0   0   0  0
+5       1   66    1     6     3     3     3     1  2  0  0   0   0   0   0  0
+6       1   39    1     3     1     1     1     1  1  0  0   2   4   1   4  3</code></pre>
+</div>
+</div>
+</section>
+<section id="descripción-de-variables" class="level1">
+<h1>Descripción de variables</h1>
+<p>Las variables utilizadas se describen a continuación en orden lógico.</p>
+<p>Edad: Esta variable indica cuántos años tiene el encuestado, se describe como cuantitativa y es fundamental para nuestro trabajo, ya que la encuesta MOLEC se aplica a partir de una cierta edad. En ella podemos ver que el hábito de lectura varía según la etapa de vida, lo que nos permite distinguir si los estímulos afectan de manera similar a jóvenes o adultos.</p>
+<p>Sexo: Este funciona para distinguir a hombres de mujeres. La variable es categórica y es utilizada como factor de control. En las investigaciones se encuentra evidencia de que existen diferencias en los hábitos de lectura. Es importante incluirla para evitar confundir el efecto de la infancia con sesgos de género.</p>
+<p>Nivel: Esta variable muestra el nivel educativo alcanzado por las personas. También es categórica, pero indispensable, ya que se suele considerar a la educación como el factor más relevante al momento de analizar los hábitos de lectura. En nuestro proyecto funcionará como variable de control para comprobar si, aunque se tenga educación, los estímulos de la infancia tienen efectos.</p>
+<p>Entidad: Este se refiere al estado de residencia de las personas. La consideramos porque la disponibilidad de materiales de lectura varía entre regiones. Al ocupar esta variable, nos permite descartar que las diferencias sean por desigualdades regionales.</p>
+<p>P34_1: “Cuando era niño(a), ¿lo llevaban a bibliotecas o librerías?” Esta es una variable categórica que nos enseña la exposición infantil a espacios en los cuales se fomentaba la lectura. Es funcional para indicar si la familia promovía la lectura fuera de la escuela como parte de su cultura.</p>
+<p>P34_2: “Cuando era niño(a), ¿veía a sus padres o tutores leer?” Variable categórica que mide el nivel de lectura en el hogar, ya que ver a los padres leer es un gran ejemplo que influye en la formación del hábito de la lectura de las personas.</p>
+<p>P34_3: “Cuando era niño(a), ¿sus padres o tutores le leían en voz alta?” Otra variable categórica en la cual se tiene una exposición directa con la lectura durante la infancia. Esta práctica es conocida por su impacto en el desarrollo cognitivo y se puede considerar un estímulo clave en la lectura.</p>
+<p>P34_4: “En su casa, ¿había libros distintos a los de texto escolar?” Variable categórica que nos indica la cantidad de libros que hay en cada hogar, ya que esto representa un recurso material que puede influir en el interés por leer a edad temprana.</p>
+<p>P2: “¿Usted acostumbra leer?” Una variable categórica que funciona como un filtro principal para conocer el hábito lector de las personas. Con esto podemos identificar a quienes practican la lectura y a quienes no.</p>
+<p>P4: “¿Cuántos libros leyó en los últimos doce meses?” Esta es una variable cuantitativa que nos indica la intensidad del hábito lector. Además de mostrar si las personas leen, también nos dice la cantidad de libros que consumen al año.</p>
+<p>P5: “¿Cuál fue el principal motivo por el que leyó libros?” Variable categórica importante, ya que es un gran indicador dentro del análisis. Con esto podemos identificar a las personas que leen por placer o a quienes lo hacen por trabajo.</p>
+<p>P10 y P11: “¿Cuántas revistas leyó en los últimos tres meses?” y “¿Cuál fue el motivo principal por el que leyó estas revistas?” Estas variables pueden funcionar como complementarias y permiten observar la lectura de revistas como parte del hábito lector. Es importante porque muchas personas tienen interés en leer materiales impresos o de tendencia.</p>
+<p>P16 y P17: “¿Cuántos periódicos leyó la semana pasada?” y “¿Cuál fue el motivo principal por el que leyó el (los) periódico(s)?” Esta variable es complementaria, ya que nos permite analizar la lectura de prensa, lo que enriquece la visión de los hábitos de lectura. Con esto observamos que existe una gran diversidad de medios en los cuales se manifiesta la práctica lectora.</p>
+</section>
+<section id="a.-exploracion-de-datos" class="level1">
+<h1>A. Exploracion de datos</h1>
+<section id="calculo-de-medias-estadisticas" class="level2">
+<h2 class="anchored" data-anchor-id="calculo-de-medias-estadisticas">1. Calculo de medias estadisticas</h2>
+<section id="variables-cuantitativas" class="level3">
+<h3 class="anchored" data-anchor-id="variables-cuantitativas">Variables cuantitativas</h3>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>   nombreVariable      media mediana rangoMedio
+1            Edad 45.6580311      44       57.5
+2      Libros(p4)  1.4346482       0       49.5
+3   Revistas(p10)  0.9434230       0       49.5
+4 Periódicos(p16)  0.8275949       0       40.0
+5 Total leído(TL)  3.2056661       1       54.5</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   nombreVariable desviacionEstandar   varianza coefVariacion
+1            Edad          16.680004 278.222538      36.53246
+2      Libros(p4)           3.852617  14.842657     268.54089
+3   Revistas(p10)           3.087290   9.531358     327.24341
+4 Periódicos(p16)           2.370654   5.620002     286.45108
+5 Total leído(TL)           6.028009  36.336887     188.04231</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   nombreVariable Q1_0.25 Q2_0.5 Q3_0.75
+1            Edad      32     44      58
+2      Libros(p4)       0      0       2
+3   Revistas(p10)       0      0       1
+4 Periódicos(p16)       0      0       0
+5 Total leído(TL)       0      1       4</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   nombreVariable      Sesgo   Curtosis
+1            Edad  0.3196385   2.262277
+2      Libros(p4)  9.4803359 141.543890
+3   Revistas(p10) 14.2103054 328.901235
+4 Periódicos(p16) 11.9710122 283.247675
+5 Total leído(TL)  6.5875265  73.476146</code></pre>
+</div>
+</div>
+</section>
+<section id="variables-cualitativas" class="level3">
+<h3 class="anchored" data-anchor-id="variables-cualitativas">Variables cualitativas</h3>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Tabla de Frecuencias: SEXO"</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Categoria Frecuencia Porcentaje.sexo_factor Porcentaje.Freq
+1    Hombre       5231                 Hombre           43.72
+2     Mujer       6735                  Mujer           56.28</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Tabla de Frecuencias: ENTIDAD (primeros 10 de 32)"</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Codigo_Entidad Frecuencia Porcentaje.Var1 Porcentaje.Freq
+1               1        275               1            2.30
+2               2        235               2            1.96
+3               3        217               3            1.81
+4               4        207               4            1.73
+5               5        286               5            2.39
+6               6        266               6            2.22
+7               7        254               7            2.12
+8               8        230               8            1.92
+9               9       1327               9           11.09
+10             10        257              10            2.15
+11             11        437              11            3.65
+12             12        261              12            2.18
+13             13        245              13            2.05
+14             14       1318              14           11.01
+15             15        885              15            7.40
+16             16        211              16            1.76
+17             17        255              17            2.13
+18             18        271              18            2.26
+19             19       1279              19           10.69
+20             20        267              20            2.23
+21             21        325              21            2.72
+22             22        256              22            2.14
+23             23        242              23            2.02
+24             24        240              24            2.01
+25             25        243              25            2.03
+26             26        242              26            2.02
+27             27        219              27            1.83
+28             28        256              28            2.14
+29             29        198              29            1.65
+30             30        305              30            2.55
+31             31        240              31            2.01
+32             32        217              32            1.81</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Tabla de Frecuencias: P34_1 (Llevaban a bibliotecas)"</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Categoria Frecuencia Porcentaje.p34_1_factor Porcentaje.Freq
+1          Sí       3456                      Sí           29.58
+2          No       7995                      No           68.42
+3 No recuerda        234             No recuerda            2.00</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Tabla de Frecuencias: P34_2 (veía a sus padres o tutores leer)"</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Categoria Frecuencia Porcentaje.p34_2_factor Porcentaje.Freq
+1          Sí       5907                      Sí           50.55
+2          No       5593                      No           47.86
+3 No recuerda        185             No recuerda            1.58</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Tabla de Frecuencias: P34_3 (sus padres o tutores le leían en voz alta)"</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Categoria Frecuencia Porcentaje.p34_2_factor Porcentaje.Freq
+1          Sí       5907                      Sí           50.55
+2          No       5593                      No           47.86
+3 No recuerda        185             No recuerda            1.58</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Tabla de Frecuencias: P34_3 (en su casa había libros distintos a los de texto escolar)"</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Categoria Frecuencia Porcentaje.p34_4_factor Porcentaje.Freq
+1          Sí       6771                      Sí           57.95
+2          No       4557                      No           39.00
+3 No recuerda        357             No recuerda            3.06</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Tabla de Frecuencias: P2 (Acostumbra leer)"</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Categoria Frecuencia Porcentaje.p2_factor Porcentaje.Freq
+1        Sí       6857                   Sí           58.68
+2        No       4828                   No           41.32</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Tabla de Frecuencias: P5 (Motivo lectura libros)"</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              Categoria Frecuencia  Porcentaje.p5_factor Porcentaje.Freq
+1               Trabajo        521               Trabajo           10.70
+2               Estudio        552               Estudio           11.34
+3       Cultura General       1127       Cultura General           23.15
+4 Gusto/Entretenimiento       2060 Gusto/Entretenimiento           42.32
+5              Religión        537              Religión           11.03
+6                  Otro         71                  Otro            1.46</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Tabla de Frecuencias: P11 (Motivo lectura de revistas)"</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              Categoria Frecuencia Porcentaje.p11_factor Porcentaje.Freq
+1               Trabajo        281               Trabajo            9.01
+2               Estudio        147               Estudio            4.71
+3       Cultura General        739       Cultura General           23.69
+4 Gusto/Entretenimiento       1747 Gusto/Entretenimiento           56.01
+5              Religión        192              Religión            6.16
+6                  Otro         13                  Otro            0.42</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Tabla de Frecuencias: P17 (Motivo lectura de periódicos)"</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              Categoria Frecuencia Porcentaje.p17_factor Porcentaje.Freq
+1               Trabajo         80               Trabajo            2.72
+2               Estudio         34               Estudio            1.16
+3       Cultura General       1799       Cultura General           61.17
+4 Gusto/Entretenimiento       1009 Gusto/Entretenimiento           34.31
+5              Religión          6              Religión            0.20
+6                  Otro         13                  Otro            0.44</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="herramientas-de-visualizacion" class="level2">
+<h2 class="anchored" data-anchor-id="herramientas-de-visualizacion">Herramientas de visualizacion</h2>
+<section id="variables-cuantitativas-1" class="level3">
+<h3 class="anchored" data-anchor-id="variables-cuantitativas-1">Variables cuantitativas</h3>
+<p>Grafica de dispersion: Textos leidos vs edad</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="main_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Gran cantidad de valores atipicos, mayor densidad cerca del 0, se nota una baja o nula coorrelacion debido a que es constante cerca del cero</p>
+<p>Grafica de barras: Textos leidos vs cantidad de gente</p>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: `geom_vline()`: Ignoring `mapping` because `xintercept` was provided.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 88 rows containing non-finite outside the scale range
+(`stat_count()`).</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 2 rows containing missing values or values outside the scale range
+(`geom_bar()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="main_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Densidad de cantidad de libros leidos</p>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 43 rows containing non-finite outside the scale range
+(`stat_density()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="main_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Distribucion asimetrica con sesgo a la izquierda</p>
+<p>Boxplot:</p>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Continuous x aesthetic
+ℹ did you forget `aes(group = ...)`?</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="main_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="análisis-de-correlacion" class="level3">
+<h3 class="anchored" data-anchor-id="análisis-de-correlacion">Análisis de correlacion</h3>
+<p>Como ya se vio en las graficas anteriores, la probabilidad que haya una correlacion entre la edad y la cantidad de textos leidos de una persona es muy baja. Tambien se puede calcular con la funcion cor(), con esta se observa que la correlacion es virtualmente nula.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.05596988</code></pre>
+</div>
+</div>
+</section>
+<section id="variables-categoricas" class="level3">
+<h3 class="anchored" data-anchor-id="variables-categoricas">Variables categoricas</h3>
+<p>Cantidad de personas que fueron a una libreria en su infancia</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="main_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Nuestro objetivo es analizar como se relacionan las tendencias de lectura con variables categoricas como la manera en la que desarrollaron su infancia y educacion.</p>
+<p>A continuacion se realizan graficos de dispersion relacionando las variables categoricas con la cantidad de textos leidos</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="main_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Porcentaje de personas que acostumbran leer</p>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Ignoring unknown labels:
+• xv : "1: si, 2: no, 0: nulo"</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="main_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="pruebas-de-hipotesis" class="level1">
+<h1>Pruebas de hipotesis</h1>
+<section id="prueba-1" class="level2">
+<h2 class="anchored" data-anchor-id="prueba-1">Prueba 1</h2>
+<p>Hay alguna relacion entre el hecho que han visto leer a sus padres (p34-2) y tengan gusto por leer en la adultez (p5=4)<br>
+</p>
+<p><span class="math display">\[
+H_0:\quad p5=4\perp\!\!\!\perp p34_2\quad H_1:\quad p5=4\not\perp\!\!\!\perp p34_2\quad \alpha = 0.5
+\]</span><br>
+</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>      LPG LPGc
+VPL  1320  740
+VPLc 4587 5319</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+<p>Conclusion: se puede rechazar la hipotesis nula, infiriendo que hay una dependencia entre el hecho de que vieran o no a sus padres leer y que lean por gusto.</p>
+<p>NOTAR: El hecho de que haya mas personas del lado VPLc, no significa que al no ver sus padres leer tienen mas probabilidad de que les guste leer, si no que las proporciones difieren en gran medida.</p>
+</section>
+<section id="prueba-2" class="level2">
+<h2 class="anchored" data-anchor-id="prueba-2">Prueba 2</h2>
+<p>Se plantea si las medias de la cantidad de libros que leen las personas que tuvieron libros en casa y las personas que no tuvieron libros en casa son diferentes</p>
+<p><span class="math display">\[
+H_0:\mu_{TL_{p34_4=1}}=\mu_{TL_{p34_4=2}}\quad H_1:\mu_{TL_{p34_4=1}}&gt;\mu_{TL_{p34_4=2}}
+\]</span></p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+<p>Hay suficiente evidencia estadistica para rechazar la hipotesis nula, por lo que podemos inferir que la media de cantidad de libros que lee la poblacion que tuvo libros en su casa es mayor a la que no.</p>
+</section>
+<section id="prueba-3" class="level2">
+<h2 class="anchored" data-anchor-id="prueba-3">Prueba 3</h2>
+<p>Se plantea si en promedio las mujeres leen mas textos que los hombres</p>
+<p><span class="math display">\[
+H_0:\mu_{\mathbf{sexo}=1}=\mu_{\mathbf{sexo}=2}\quad H_1:\mu_{\mathbf{sexo}=1}&lt;\mu_{\mathbf{sexo}=2}
+\]</span></p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<p>NO hay suficiente evidencia estadistica para rechazar la hipotesis nula, por lo que nos quedamos con la inferencia de que en promedio los hombres leen mas o igual que las mujeres.</p>
+</section>
+<section id="prueba-4" class="level2">
+<h2 class="anchored" data-anchor-id="prueba-4">Prueba 4</h2>
+<p>Se quiere comprobar si el hecho de que fueran llevados a bibliotecas y librerias en su infancia afecte la probabilidad de que lean frecuentemente</p>
+<p><span class="math display">\[
+H_0: p34_1\perp\!\!\!\perp p2\quad H_1:p34_1\not\perp\!\!\!\perp p2
+\]</span></p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>     FLB FLBc
+LF  2588 4143
+LFc  868 3852</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+<p>En conclusion hay suficiente evidencia estadistica para rechazar la hipotesis nula, permitiendonos inferir que hay una relacion entre si los llevaron a bibliotecas y librerias y si leen frecuentemente.</p>
+</section>
+<section id="intervalos-de-confianza" class="level2">
+<h2 class="anchored" data-anchor-id="intervalos-de-confianza">Intervalos de confianza</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>1) Proporción P5 = 'Gusto/Entretenimiento'</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>n = 4868 k = 2060 </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>p = 0.4232 IC 96% = [ 0.4086 , 0.4377 ]</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>2) Diferencia de proporciones (Libros en casa: Sí vs No)</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>n(Sí) = 3591 k(Sí) = 1532  p1 = 0.4266 </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>n(No) = 1205 k(No) = 501  p2 = 0.4158 </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>p1 - p2 = 0.0109 IC 96% = [ -0.0229 , 0.0446 ]</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>3) Media TL (total leído)</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>n = 11966 media = 3.2057 sd = 6.028 </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>IC 96% (t) = [ 3.0925 , 3.3189 ]</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>4) Varianza p4 (número de libros leídos)</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>n = 11966 s^2 = 14.8427 </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>IC 96% para ^2 = [ 14.4562 , 15.2447 ]</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Resumen de intervalos de confianza (IC 96%)"</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                         Indicador Estimador IC_Inferior
+1                Proporción que lee por gusto (P5)    0.4232      0.4086
+2 Diferencia proporciones (Libros en casa Sí - No)    0.0109     -0.0229
+3                       Media del total leído (TL)    3.2057      3.0925
+4        Varianza del número de libros leídos (P4)   14.8427     14.4562
+  IC_Superior
+1      0.4377
+2      0.0446
+3      3.3189
+4     15.2447</code></pre>
+</div>
+</div>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
