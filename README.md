@@ -2,7 +2,7 @@
 
 # Resultados del reporte
 
-Ver los documentos, veasé el directorio "Reporte_MEPTD"
+Veasé los documentos en el directorio "Reporte_MEPTD"
 
 ## ¿Qué leemos los mexicanos?
 INEGI (https://www.inegi.org.mx/programas/molec/ Links to an external site.) en su introducción al Módulo de Lectura (MOLEC) indica que: "El Módulo sobre Lectura (MOLEC) comenzó a levantarse a partir de 2015, los meses de: febrero, mayo y agosto; a partir de 2017, una vez al año en el mes de febrero. El MOLEC tiene el propósito de generar información estadística sobre el comportamiento lector de la población mexicana de 18 años y más, con la finalidad de proporcionar datos útiles sobre las características de la lectura de la citada población y proporcionar elementos para fomentar el hábito de la lectura", pero ¿se ha logrado el ansiado objetivo de INEGI? Alrededor de este gran objetivo podríamos preguntarnos ¿por qué es importante contabilizar qué lee y cuánto lee la población mexicana? ¿por qué es importante la lectura? ¿la lectura es un negocio? ¿Cuáles son las áreas de negocio de la lectura en México?
